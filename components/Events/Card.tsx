@@ -38,12 +38,12 @@ function CardElementHorizontal() {
   return (
     <>
       <Card className="p-0 cursor-pointer flex w-full">
-        <CardHeader className="flex items-center justify-center p-3">
+        <CardHeader className="flex items-center justify-center py-2 pl-3">
           <Image
           src={Imgg}
           alt="Picture of nature"
           height={300}
-          width={400}
+          width={500}
           className="object-cover rounded-t-md"
           />
         </CardHeader>

@@ -22,7 +22,7 @@ const Footer = () => {
             <nav className="flex flex-col items-center md:items-start gap-2 text-lg text-[#535353]">
               <Link href="/">Home</Link>
               <Link href="/about">About</Link>
-              <Link href="/services">Services</Link>
+              <Link href="/blogs">Blogs</Link>
               <Link href="/contact">Contact</Link>
             </nav>
             <form className="text-[#474747] flex flex-col">
