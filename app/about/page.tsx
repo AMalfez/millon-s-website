@@ -16,7 +16,7 @@ const AboutPage = () => {
             <div className='w-full md:w-[569px] md:h-[251px] text-center flex gap-2 md:gap-0 flex-col justify-between items-center px-4 md:px-0'>
                 <h2 className='text-[30px] leading-[30px] md:text-[40px] font-semibold'>Discover Our Journey So Far</h2>
                 <p className='text-[12px] md:text-[18px] font-normal text-[#2D2D2D]'>
-                    Wendy, the owner/founder of OC Fun Frenzy, has been living in Orange County, California for several years now and is always looking for new and fun things to do, but she found it difficult to find adventures. She would spend hours online looking for unique experiences and finally decided to just create her own one-stop place to house all of them. So, she created this site. She hopes you enjoy it!
+                    Wendy, the owner/founder of OC Fun Frenzy, has been living in Orange County, California for several years now and is always looking for new and fun things to do, but she found it difficult to find adventures. She would spend hours online looking for unique experiences and finaly decided to just create her own one-stop place to house all of them. So, she created this site. She hopes you enjoy it!
                 </p>
             </div>
         </div>
