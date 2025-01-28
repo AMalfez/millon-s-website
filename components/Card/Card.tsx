@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 const Card = () => {
   return (
-    <div className='min-w-[200px] md:min-w-[300px] h-full bg-white shadow-lg rounded-lg p-4 relative overflow-hidden'>
+    <div className='min-w-[200px] md:min-w-[300px] h-full bg-white shadow-lg rounded-lg p-4 relative overflow-hidden inline-block'>
         <Image src={HeroImage} alt='' fill objectFit='cover' />
     </div>
   )
