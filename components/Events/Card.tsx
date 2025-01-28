@@ -42,7 +42,7 @@ function CardElementHorizontal() {
           <Image
           src={Imgg}
           alt="Picture of nature"
-          height={200}
+          height={300}
           width={400}
           className="object-cover rounded-t-md"
           />
@@ -51,6 +51,7 @@ function CardElementHorizontal() {
           <p className="font-bold text-xl">Dana Point – Baby Beach</p>
           <p className="text-[#B0B0B0] flex items-center gap-1"><Clock size={16} color="#b0b0b0" /> 01-01-2024 - 01-01-3024</p>
           <p className="text-[#B0B0B0] flex gap-1"><MapPin size={16} className="mt-1" color="#b0b0b0" /> 34451 Ensenada Pl, Dana Point, CA</p>
+          <p className="text-[#B0B0B0] flex gap-1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, commodi dolorum doloremque, cumque atque reiciendis distinctio ab ipsam a eveniet ut consequuntur asperiores corrupti.</p>
           <div className="mt-3"><Badge variant={"secondary"}>Badge</Badge></div>
         </CardContent>
       </Card>

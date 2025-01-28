@@ -1,13 +1,13 @@
 import Events from "@/components/Events/Events";
 import FilterForm from "@/components/FilterForm/FilterForm";
-import Hero from "@/components/Hero/Hero";
+import HeroCarousel from "@/components/Hero/Carousel";
 import Navbar from "@/components/Navbar/Navbar";
 
 export default function Home() {
   return (
     <div>
       <Navbar/>
-      <Hero/>
+      <HeroCarousel/>
       <FilterForm/>
       <Events/>
     </div>
