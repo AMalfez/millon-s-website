@@ -16,10 +16,10 @@ function TagForm() {
         setTags(newTags);
     }
   return (
-    <div className='border flex gap-2 px-2 bg-white rounded-md'>
+    <div className='border flex bg-white rounded-md'>
         <div className='flex items-center gap-2'>
             {tags.map((tag, index) => (
-                <div key={index} className='border flex items-center justify-center h-fit bg-[#FF9501] text-white rounded-md px-2'>
+                <div key={index} className='border flex items-center justify-center ml-2 h-fit bg-[#FF9501] text-white rounded-md px-2'>
                     {tag}
                     <span className='ml-2 cursor-pointer' onClick={()=>handleCancel(index)}>x</span>
                 </div>
