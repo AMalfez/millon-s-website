@@ -8,9 +8,9 @@ import TagForm from "./TagForm";
 
 function FilterForm() {
   return (
-    <div className="flex flex-col gap-2 px-28 py-16">
+    <div className="flex flex-col gap-2 px-10 md:px-20 lg:px-28 py-16">
         <TagForm/>
-        <div className="flex space-x-2">
+        <div className="flex flex-col md:flex-row gap-2">
             <Input type="text" placeholder="Location" />
             <SelectCategory/>
             <SelectType/>

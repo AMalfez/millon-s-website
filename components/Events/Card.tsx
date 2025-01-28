@@ -27,8 +27,8 @@ function CardElement() {
         <CardContent className="mt-3">
           <p className="font-bold text-xl">Dana Point – Baby Beach</p>
           <p className="text-[#B0B0B0] flex items-center gap-1"><Clock size={16} color="#b0b0b0" /> 01-01-2024 - 01-01-3024</p>
-          <p className="text-[#B0B0B0] flex items-center gap-1"><MapPin size={16} color="#b0b0b0" /> 34451 Ensenada Pl, Dana Point, CA</p>
-          <div><Badge variant={"secondary"}>Badge</Badge></div>
+          <p className="text-[#B0B0B0] flex gap-1"><MapPin className="mt-1" size={16} color="#b0b0b0" /> 34451 Ensenada Pl, Dana Point, CA</p>
+          <div className="mt-3"><Badge variant={"secondary"}>Badge</Badge></div>
         </CardContent>
       </Card>
     </>
@@ -50,8 +50,8 @@ function CardElementHorizontal() {
         <CardContent className="mt-3">
           <p className="font-bold text-xl">Dana Point – Baby Beach</p>
           <p className="text-[#B0B0B0] flex items-center gap-1"><Clock size={16} color="#b0b0b0" /> 01-01-2024 - 01-01-3024</p>
-          <p className="text-[#B0B0B0] flex items-center gap-1"><MapPin size={16} color="#b0b0b0" /> 34451 Ensenada Pl, Dana Point, CA</p>
-          <div><Badge variant={"secondary"}>Badge</Badge></div>
+          <p className="text-[#B0B0B0] flex gap-1"><MapPin size={16} className="mt-1" color="#b0b0b0" /> 34451 Ensenada Pl, Dana Point, CA</p>
+          <div className="mt-3"><Badge variant={"secondary"}>Badge</Badge></div>
         </CardContent>
       </Card>
     </>

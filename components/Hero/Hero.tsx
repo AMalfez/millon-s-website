@@ -11,9 +11,9 @@ function Hero() {
                 <div className='bg-white rounded-md py-1 flex justify-between px-2 gap-2 mt-5 w-3/4 md:w-2/4'>
                     <div className='flex gap-2 w-full items-center'>
                         <Search className='text-gray-400 text-sm'/>
-                        <input type='text' className='text-black outline-none border-none' placeholder='Search for adventures...'/>
+                        <input type='text' className='text-black outline-none md:border-none' placeholder='Search for adventures...'/>
                     </div>
-                    <button className='bg-orange-500 transition-all duration-75 ease-in px-2 py-1 rounded-md hover:bg-orange-600'>Search</button>
+                    <button className='bg-orange-500 hidden md:inline-block transition-all duration-75 ease-in px-2 py-1 rounded-md hover:bg-orange-600'>Search</button>
                 </div>
             </div>
         </div>
