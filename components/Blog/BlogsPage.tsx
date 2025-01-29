@@ -4,6 +4,7 @@ import Img from "@/public/assets/06/Balboa-funzone-300x150.jpg";
 import Image from "next/image";
 import { Heart, MessageSquareText, Search, Share2 } from "lucide-react";
 import { Badge } from "../ui/badge";
+import Link from "next/link";
 
 const blogs = [
   // Sample blog data
@@ -72,12 +73,15 @@ const BlogsPage: React.FC = () => {
       </div>
       <div className="w-full flex flex-wrap md:flex-col gap-3">
         {filteredBlogs.map((blog) => (
-          <div key={blog.id} className="flex flex-col w-full md:flex-row border rounded-md bg-white cursor-pointer p-2">
+          <Link
+            key={blog.id}
+            href={`/blogs/${blog.id}`}
+            className="flex flex-col w-full md:flex-row border rounded-md bg-white cursor-pointer p-2 no-underline text-inherit"
+          >
             <Image
               src={Img}
               alt={blog.title}
               className="rounded-md w-full md:w-[250px] md:h-[150px] mr-5 object-cover"
-              
             />
             <div className="w-full">
               <h2 className="text-[18px] font-semibold">{blog.title}</h2>
@@ -87,33 +91,36 @@ const BlogsPage: React.FC = () => {
               <p className="text-[15px] text-[#979797]">{blog.description}</p>
               <div className="flex flex-wrap justify-between mt-3">
                 <div className="flex gap-2">
-                {blog.tags.map((tag) => (
-                  <Badge variant={"secondary"}>{tag}</Badge>
-                ))}
+                  {blog.tags.map((tag) => (
+                    <Badge key={tag} variant={"secondary"}>
+                      {tag}
+                    </Badge>
+                  ))}
                 </div>
                 <div className="flex gap-2">
-                <p className="flex items-center text-[14px] text-[#979797] gap-1">
-                  <Heart size={14} />
-                  {blog.likes}
-                </p>
-                <p className="flex items-center text-[14px] text-[#979797] gap-1">
-                  <MessageSquareText size={14} />
-                  {blog.comments}
-                </p>
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(
-                      `https://yourwebsite.com/blog/${blog.id}`
-                    );
-                    alert(`Link to ${blog.title} copied to clipboard!`);
-                  }}
-                >
-                  <Share2 size={14} color="#979797" />
-                </button>
+                  <p className="flex items-center text-[14px] text-[#979797] gap-1">
+                    <Heart size={14} />
+                    {blog.likes}
+                  </p>
+                  <p className="flex items-center text-[14px] text-[#979797] gap-1">
+                    <MessageSquareText size={14} />
+                    {blog.comments}
+                  </p>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigator.clipboard.writeText(
+                        `https://yourwebsite.com/blog/${blog.id}`
+                      );
+                      alert(`Link to ${blog.title} copied to clipboard!`);
+                    }}
+                  >
+                    <Share2 size={14} color="#979797" />
+                  </button>
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
