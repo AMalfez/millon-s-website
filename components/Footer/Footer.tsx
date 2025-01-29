@@ -4,20 +4,24 @@ import Link from "next/link";
 import Logo from "@/public/assets/06/logo_horizontal-300x125.png";
 import Image from "next/image";
 
-const Footer = () => {
+interface FooterProps {
+  background?: string;  
+}
+
+const Footer: React.FC<FooterProps> = ({background}) => {
   return (
     <footer
       style={{ backgroundImage: "linear-gradient(to bottom, #F3F4F6, #F7D7AC)" }}
       className="flex flex-col gap-20 pb-1"
     >
-      <div className="flex gap-8 md:gap-0 flex-col md:flex-row justify-between">
-        <div className="w-full md:w-1/2 md:pl-28 mt-10 flex flex-col items-center md:items-start">
+      <div className="flex gap-8 md:gap-0 flex-col md:flex-row justify-between md:max-w-[856px] md:mx-auto">
+        <div className="w-full md:w-1/2 mt-10 flex flex-col items-center md:items-start ">
           <Image src={Logo} alt="Logo" width={180} height={62.5} />
           <p className="text-neutral-600 w-full text-md text-center md:text-left">
             Fun adventure in Orange County, CA.
           </p>
         </div>
-        <div className="w-full md:w-1/2 flex justify-center md:justify-end px-28">
+        <div className="w-full md:w-1/2  px-28">
           <div className="flex flex-col gap-6 w-fit">
             <nav className="flex flex-col items-center md:items-start gap-2 text-lg text-[#535353]">
               <Link href="/">Home</Link>
@@ -33,14 +37,14 @@ const Footer = () => {
               <div className="flex flex-col lg:flex-row gap-2 mt-2">
                 <input
                   type="email"
-                  placeholder="Sign up for newsletter"
+                  placeholder="Email"
                   className="py-2 outline-none px-4 rounded-md"
                 />
                 <button
                   type="submit"
                   className="bg-[#FF9501] w-fit transition-all hover:bg-[#ffab35] py-2 px-4 text-white font-semibold rounded-md"
                 >
-                  Sign Up
+                  Search
                 </button>
               </div>
             </form>

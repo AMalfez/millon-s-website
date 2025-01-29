@@ -14,8 +14,8 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="text-white absolute top-0 z-50 w-full navbar_container">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-36">
+    <nav className="text-white absolute top-0 z-50 w-full navbar_container p-4">
+      <div className="max-w-[856px] mx-auto">
         <div className="flex justify-between h-16">
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="text-xl font-bold">
