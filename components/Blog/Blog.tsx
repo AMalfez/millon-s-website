@@ -9,6 +9,7 @@ export default function Blog(){
     return(
         <div className='max-w-[856px] mx-auto'>
             <MoveLeft className='cursor-pointer' color='#979797' />
+            {param.id}
         </div>
     )
 }
