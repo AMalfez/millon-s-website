@@ -8,7 +8,7 @@ import TagForm from "./TagForm";
 
 function FilterForm() {
   return (
-    <div className="flex flex-col gap-2 px-10 md:px-20 lg:px-28 py-16">
+    <div className="flex flex-col gap-2 max-w-[856px] mx-auto py-16">
         <TagForm/>
         <div className="flex flex-col md:flex-row gap-2">
             <Input type="text" placeholder="Location" />

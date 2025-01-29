@@ -7,7 +7,7 @@ function Events() {
   const [isActive, setIsActive] = React.useState(false);
   const handleClick = () => setIsActive(!isActive);
   return (
-    <div className="w-full min-h-80 flex flex-col items-center px-10 md:px-20 lg:px-28">
+    <div className="w-full min-h-80 flex flex-col items-center max-w-[856px] mx-auto">
       <div className="flex justify-between items-center w-full">
         <div className="font-sans text-xl font-semibold">Events</div>
         <div className="items-center gap-2 hidden md:flex">

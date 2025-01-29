@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 
 const ContactPage = () => {
   return (
-    <div className='bg-[#F3F4F6] flex justify-center items-center mt-16 py-20 px-4'>
+    <div className='bg-[#F3F4F6] flex justify-center items-center mt-16 py-20 px-4 mb-20'>
         <div className='min-h-fit md:h-[528px] w-full md:w-[856px] flex flex-col justify-between items-center'>
             <div className='w-full h-[32px] flex gap-2 md:gap-6 font-bold text-[20px] md:text-[28px] items-center'>
                 <div className='relative h-[16px] md:h-[24px] w-[16px] md:w-[24px]'>
