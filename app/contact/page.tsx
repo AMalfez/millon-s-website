@@ -1,4 +1,3 @@
-import { Import } from 'lucide-react'
 import React from 'react'
 import Image from 'next/image'
 import ArrowLeft from '../../public/assets/images/ArrowLeft.png'
