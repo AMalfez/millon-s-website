@@ -7,7 +7,7 @@ import Image from "next/image";
 const Footer = () => {
   return (
     <footer
-      style={{ background: "linear-gradient(to bottom, #F3F4F6, #F7D7AC)" }}
+      style={{ backgroundImage: "linear-gradient(to bottom, #F3F4F6, #F7D7AC)" }}
       className="flex flex-col gap-20 pb-1"
     >
       <div className="flex gap-8 md:gap-0 flex-col md:flex-row justify-between">
