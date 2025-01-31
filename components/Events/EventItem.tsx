@@ -6,21 +6,21 @@ import Link from "next/link";
 import Paragraph from "../Blog/Paragraph";
 function EventItem() {
   return (
-    <div className="max-w-[856px] border mx-auto bg-white rounded-lg min-h-56 px-4 py-2">
+    <div className="max-w-[856px] border mx-auto bg-white rounded-lg min-h-56 p-3 md:px-7 md:py-5">
       <MoveLeft color="#979797" />
-      <div className="w-full min-h-20 px-5">
+      <div className="w-full min-h-20 mt-3 md:mt-5 px-5">
         <EventCarousel />
         <div className="mt-5">
-          <div className="flex">
-            <p className="font-semibold w-3/12">Location</p>
+          <div className="flex flex-col mt-3 md:mt-0 md:flex-row">
+            <p className="font-semibold md:w-3/12">Location</p>
             <p className="text-[#b0b0b0]">34451 Ensenada PI, Dana Point, CA</p>
           </div>
-          <div className="flex">
-            <p className="font-semibold w-3/12">Available dates</p>
+          <div className="flex flex-col mt-3 md:mt-0 md:flex-row">
+            <p className="font-semibold md:w-3/12">Available dates</p>
             <p className="text-[#b0b0b0]">Jan 1, 2024 - Jan 1, 3024</p>
           </div>
-          <div className="flex">
-            <p className="font-semibold w-3/12">Organized by</p>
+          <div className="flex flex-col mt-3 md:mt-0 md:flex-row">
+            <p className="font-semibold md:w-3/12">Organized by</p>
             <Link className="text-[#b0b0b0] underline" href={"/"}>Admin</Link>
           </div>
         </div>

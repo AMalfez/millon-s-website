@@ -16,7 +16,7 @@ function EventCarousel() {
       />
       <div className="gradient__container rounded-md absolute top-0 w-full h-full">
       </div>
-      <p className="text-white absolute bottom-2 left-3 text-2xl font-semibold">Dana Point - Baby Beach</p>
+      <p className="text-white absolute bottom-2 left-3 text-xl md:text-2xl font-semibold">Dana Point - Baby Beach</p>
       <Share2 color="white" className="absolute bottom-4 cursor-pointer right-3" size={18} />
     </div>
   );
