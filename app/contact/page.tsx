@@ -1,9 +1,8 @@
-"use client";
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import ArrowLeft from '../../public/assets/images/ArrowLeft.png';
-import Mail from "../../public/assets/images/Mail.png";
-import { Input } from '@/components/ui/input';
+import React from 'react'
+import Image from 'next/image'
+import ArrowLeft from '../../public/assets/images/ArrowLeft.png'
+import Mail from "../../public/assets/images/Mail.png"
+import { Input } from '@/components/ui/input'
 
 const ContactPage = () => {
   const [isClient, setIsClient] = useState(false); // State to ensure client-side only
