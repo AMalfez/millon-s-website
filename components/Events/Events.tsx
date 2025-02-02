@@ -1,10 +1,12 @@
 "use client";
 import { SquareSquare, Menu } from "lucide-react";
-import React from "react";
+import React, { useContext } from "react";
 import { CardElement, CardElementHorizontal } from "./Card";
 import Link from "next/link";
+// import { EventContext } from "@/context/EventContext";
 
-function Events() {
+function Events({events}:any) {
+  // const events = useContext(EventContext);
   const [isActive, setIsActive] = React.useState(false);
   const handleClick = () => setIsActive(!isActive);
   return (
@@ -26,7 +28,7 @@ function Events() {
           />
         </div>
       </div>
-      {!isActive && (
+      {/* {!isActive && (
         <div className="w-full h-full mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[1, 2, 3].map((_, i) => (
             <Link className="w-fit mx-auto" href={`/events/${i}`} key={i}>
@@ -34,13 +36,23 @@ function Events() {
             </Link>
           ))}
         </div>
+      )} */}
+      {!isActive && (
+        <div className="w-full h-full mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="event_section_scroll_to">
+          {events.map((e:any, i:number) => (
+            <Link className="w-fit mx-auto" href={`/events/${i}`} key={i}>
+              <CardElement key={i} event={e} />
+            </Link>
+          ))}
+        </div>
       )}
       {isActive && (
         <div className="w-full h-full mt-5 grid grid-cols-1 gap-4">
-          <CardElementHorizontal />
-          <CardElementHorizontal />
-          <CardElementHorizontal />
-          <CardElementHorizontal />
+          {events.map((e:any, i:number) => (
+            <Link className="w-full mx-auto" href={`/events/${i}`} key={i}>
+              <CardElementHorizontal key={i} event={e} />
+            </Link>
+          ))}
         </div>
       )}
       <button className="border-2 border-[#474747] transition-all text-[#474747] rounded-md hover:bg-[#474747] hover:text-white my-10 px-4 py-2">

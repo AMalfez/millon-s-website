@@ -38,9 +38,8 @@ const categories = [
   }
 ]
 
-export function SelectCategory() {
+export function SelectCategory({query,setQuery}:any) {
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -51,8 +50,8 @@ export function SelectCategory() {
           aria-expanded={open}
           className="w-full justify-between"
         >
-          {value
-            ? categories.find((c) => c.value === value)?.label
+          {query.category
+            ? categories.find((c) => c.value === query.category)?.label
             : "Choose Event Category"}
           <ChevronDown className="opacity-50" />
         </Button>
@@ -68,7 +67,7 @@ export function SelectCategory() {
                   key={c.value}
                   value={c.value}
                   onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
+                    setQuery(currentValue === query.category ? {...query,category:""} : {...query,category:currentValue})
                     setOpen(false)
                   }}
                 >
@@ -76,7 +75,7 @@ export function SelectCategory() {
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === c.value ? "opacity-100" : "opacity-0"
+                      query.category === c.value ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>

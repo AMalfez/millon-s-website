@@ -122,9 +122,8 @@ const types = [
   }
 ]
 
-export function SelectType() {
+export function SelectType({query, setQuery}:any) {
   const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -135,8 +134,8 @@ export function SelectType() {
           aria-expanded={open}
           className="w-full justify-between"
         >
-          {value
-            ? types.find((type) => type.value === value)?.label
+          {query.type
+            ? types.find((type) => type.value === query.type)?.label
             : "Choose Event Type"}
           <ChevronDown className="opacity-50" />
         </Button>
@@ -151,8 +150,8 @@ export function SelectType() {
                 <CommandItem
                   key={type.value}
                   value={type.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
+                  onSelect={(currentValue:any) => {
+                    setQuery(currentValue === query.type ? {...query, type:""} : {...query, type:currentValue})
                     setOpen(false)
                   }}
                 >
@@ -160,7 +159,7 @@ export function SelectType() {
                   <Check
                     className={cn(
                       "ml-auto",
-                      value === type.value ? "opacity-100" : "opacity-0"
+                      query.type === type.value ? "opacity-100" : "opacity-0"
                     )}
                   />
                 </CommandItem>
