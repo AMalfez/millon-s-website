@@ -1,12 +1,10 @@
 "use client";
 import { SquareSquare, Menu } from "lucide-react";
-import React, { useContext } from "react";
+import React from "react";
 import { CardElement, CardElementHorizontal } from "./Card";
 import Link from "next/link";
-// import { EventContext } from "@/context/EventContext";
 
 function Events({events}:any) {
-  // const events = useContext(EventContext);
   const [isActive, setIsActive] = React.useState(false);
   const handleClick = () => setIsActive(!isActive);
   return (
@@ -28,15 +26,6 @@ function Events({events}:any) {
           />
         </div>
       </div>
-      {/* {!isActive && (
-        <div className="w-full h-full mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[1, 2, 3].map((_, i) => (
-            <Link className="w-fit mx-auto" href={`/events/${i}`} key={i}>
-              <CardElement key={i} />
-            </Link>
-          ))}
-        </div>
-      )} */}
       {!isActive && (
         <div className="w-full h-full mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="event_section_scroll_to">
           {events.map((e:any, i:number) => (

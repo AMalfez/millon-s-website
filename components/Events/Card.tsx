@@ -4,38 +4,31 @@ import {
   CardContent,
   CardHeader,
 } from "@/components/ui/card";
-import Imgg from "@/public/assets/09/History-of-OC.jpg"
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge"
 
 import React from "react";
 import { Clock, MapPin } from "lucide-react";
 
-function CardElement({event}: any|undefined) {
+function CardElement({event}: any) {
   return (
     <>
       <Card className="p-0 cursor-pointer w-fit">
         <CardHeader>
-          {!event ? (<Image
-          src={Imgg}
-          alt="Picture of nature"
-          height={200}
-          width={400}
-          className="object-cover rounded-t-md"
-          />):(<Image
+          <Image
             src={event.image}
             alt="Picture of nature"
             height={200}
             width={400}
             className="object-cover rounded-t-md"
-            />)}
+            />
         </CardHeader>
         <CardContent className="mt-3">
-          <p className="font-bold text-xl">{!event ? "Dana Point – Baby Beach":event.title}</p>
-          <p className="text-[#B0B0B0] flex items-center gap-1"><Clock size={16} color="#b0b0b0" /> {!event ? "01-01-2024":event.date_from} - {!event ? "01-01-2025":event.date_to}</p>
-          <p className="text-[#B0B0B0] flex gap-1"><MapPin className="mt-1" size={16} color="#b0b0b0" /> {!event ? "34451 Ensenada Pl, Dana Point, CA":event.location}</p>
+          <p className="font-bold text-xl">{event.title}</p>
+          <p className="text-[#B0B0B0] flex items-center gap-1"><Clock size={16} color="#b0b0b0" /> {event.date_from} - {event.date_to}</p>
+          <p className="text-[#B0B0B0] flex gap-1"><MapPin className="mt-1" size={16} color="#b0b0b0" /> {event.location}</p>
           <div className="mt-3 flex gap-2">
-            {!event ? (<Badge variant={"secondary"}>Badge</Badge>):(event.tags.map((tag: string, index: number) => (<Badge key={index} variant={"secondary"}>{tag}</Badge>)))}
+            {event.tags.map((tag: string, index: number) => (<Badge key={index} variant={"secondary"}>{tag}</Badge>))}
           </div>
         </CardContent>
       </Card>

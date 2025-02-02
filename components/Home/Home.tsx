@@ -1,13 +1,11 @@
 "use client";
-// import { EventContext, EventDispatchContext } from "@/context/EventContext";
-import { eventReducer, initialState } from "@/reducers/EventReducer";
+import { initialState } from "@/reducers/EventReducer";
 import React, { useEffect } from "react";
 import HeroCarousel from "../Hero/Carousel";
 import FilterForm from "../FilterForm/FilterForm";
 import Events from "../Events/Events";
 
 function Home() {
-  // const [events, dispatch] = useReducer(eventReducer, initialState);
   const [events, setEvents] = React.useState(initialState);
   const [query, setQuery] = React.useState<any>({
     title: "",
