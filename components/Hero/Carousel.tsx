@@ -9,7 +9,7 @@ import { Search } from "react-feather";
 import "./Hero.css"
 import { Query } from "../Home/HomeTypes";
 
-export default function HeroCarousel({setQuery, query}:{query:Query, setQuery:Function}) {
+export default function HeroCarousel({setQuery, query}:{query:Query, setQuery:React.Dispatch<React.SetStateAction<Query>>}) {
   const handleSearch = (e:React.ChangeEvent<HTMLInputElement>) => setQuery({...query, title:e.target.value});
   const handleClick = () => {
     const element = document.getElementById("event_section_scroll_to");

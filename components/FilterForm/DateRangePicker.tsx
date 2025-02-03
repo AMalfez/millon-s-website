@@ -22,7 +22,7 @@ export function DatePickerWithRange({
 }: {
   className: string;
   query: Query;
-  setQuery: Function;
+  setQuery: React.Dispatch<React.SetStateAction<Query>>;
 }) {
   const [date, setDate] = React.useState<DateRange | undefined>(undefined);
   React.useEffect(()=>{

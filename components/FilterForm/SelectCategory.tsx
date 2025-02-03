@@ -39,7 +39,7 @@ const categories = [
   }
 ]
 
-export function SelectCategory({query,setQuery}:{query:Query, setQuery:Function}) {
+export function SelectCategory({query,setQuery}:{query:Query, setQuery:React.Dispatch<React.SetStateAction<Query>>}) {
   const [open, setOpen] = React.useState(false)
 
   return (

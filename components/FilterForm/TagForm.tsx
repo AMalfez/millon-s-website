@@ -3,7 +3,7 @@ import React from 'react'
 import { Input } from '../ui/input'
 import { Query } from '../Home/HomeTypes';
 
-function TagForm({query, setQuery}:{query:Query, setQuery:Function}) {
+function TagForm({query, setQuery}:{query:Query, setQuery:React.Dispatch<React.SetStateAction<Query>>}) {
     const [value, setValue] = React.useState<string>('');
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);

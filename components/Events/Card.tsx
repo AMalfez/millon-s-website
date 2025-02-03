@@ -9,8 +9,11 @@ import { Badge } from "@/components/ui/badge"
 
 import React from "react";
 import { Clock, MapPin } from "lucide-react";
-
-function CardElement({event}: any) {
+import { Event } from "@/reducers/EventReducer";
+interface EventProp {
+  event: Event;
+}
+const CardElement: React.FC<EventProp> =({event}) => {
   return (
     <>
       <Card className="p-0 cursor-pointer w-fit">

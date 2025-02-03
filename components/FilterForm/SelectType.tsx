@@ -123,7 +123,7 @@ const types = [
   }
 ]
 
-export function SelectType({query, setQuery}:{query:Query, setQuery:Function}) {
+export function SelectType({query, setQuery}:{query:Query, setQuery:React.Dispatch<React.SetStateAction<Query>>}) {
   const [open, setOpen] = React.useState(false)
 
   return (

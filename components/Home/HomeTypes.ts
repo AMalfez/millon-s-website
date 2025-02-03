@@ -1,6 +1,6 @@
 interface DateRange {
-    from: string;
-    to: string;
+    from: string | Date | undefined;
+    to: string | Date | undefined;
   }
  export interface Query {
     title: string;
