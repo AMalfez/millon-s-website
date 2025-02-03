@@ -15,7 +15,6 @@ export default function Blog() {
   // const param = useParams();
   return (
     <div className="max-w-[856px] mx-auto">
-      <MoveLeft className="cursor-pointer" color="#979797" />
       <div className="max-w-[836px] mt-5 mx-auto border-b-2 border-[#b0b0b0] pb-5">
         <h1 className="text-xl font-semibold">
           The Most Popular Ride at Disneyland

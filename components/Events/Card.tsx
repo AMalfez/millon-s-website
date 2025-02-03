@@ -24,7 +24,7 @@ const CardElement: React.FC<EventProp> =({event}) => {
             alt="Picture of nature"
             height={200}
             width={400}
-            className="object-cover aspect-video rounded-md"
+            className="object-cover w-full aspect-video rounded-md"
             />
         </CardHeader>
         <CardContent className="mt-3">

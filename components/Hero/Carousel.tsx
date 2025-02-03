@@ -36,11 +36,11 @@ export default function HeroCarousel({setQuery, query}:{query:Query, setQuery:Re
             <div className="w-full h-screen hero_container_three"></div>
         </CarouselItem>
       </CarouselContent>
-      <div className="hero_text flex flex-col items-center w-full">
-        <p className="text-4xl lg:text-5xl tracking-wide w-10/12 lg:w-7/12 font-[600] ">
+      <div className="hero_text flex flex-col items-center w-full max-w-[900px]">
+        <p className="text-4xl lg:text-5xl tracking-wide font-[600] ">
           Looking for a new adventure this weekend in Orange County, California?
         </p>
-        <div className="bg-white rounded-md py-1 flex justify-between pl-2 pr-1 gap-2 mt-5 w-fit md:w-2/4">
+        <div className="bg-white rounded-md py-1 flex justify-between pl-2 pr-1 gap-2 mt-5 w-10/12">
           <div className="flex gap-2 w-full items-center">
             <Search className="text-gray-400 text-sm hidden md:inline-block" />
             <input

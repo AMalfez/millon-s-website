@@ -6,10 +6,9 @@ import Link from "next/link";
 import Paragraph from "../Blog/Paragraph";
 function EventItem() {
   return (
-    <div className="max-w-[856px] border mx-auto bg-white rounded-lg min-h-56 p-3 md:px-7 md:py-5">
-      <MoveLeft color="#979797" />
-      <div className="w-full min-h-20 mt-3 md:mt-5 px-5">
-        <EventCarousel />
+    <div className="max-w-[856px] border mx-auto bg-white rounded-lg min-h-56 p-3">
+      <EventCarousel />
+      <div className="w-full min-h-20 px-3">
         <div className="mt-5">
           <div className="flex flex-col mt-3 md:mt-0 md:flex-row">
             <p className="font-semibold md:w-3/12">Location</p>

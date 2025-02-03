@@ -1,20 +1,18 @@
 import React from 'react'
 import Image from 'next/image'
-import ArrowLeft from '../../public/assets/images/ArrowLeft.png'
 import Mail from "../../public/assets/images/Mail.png"
 import { Input } from '@/components/ui/input'
+import BackButton from '@/components/ui/BackButton'
 
 const ContactPage = () => {
   return (
     <div className='bg-[#F3F4F6] flex justify-center items-center mt-16 py-20 px-4'>
-      <div className='min-h-fit md:h-[528px] w-full md:w-[856px] flex flex-col justify-between items-center'>
+      <div className='min-h-fit md:h-[528px] w-10/12 flex flex-col justify-between items-center'>
         <div className='w-full h-[32px] flex gap-2 md:gap-6 font-bold text-[20px] md:text-[28px] items-center'>
-          <div className='relative h-[16px] md:h-[24px] w-[16px] md:w-[24px]'>
-            <Image src={ArrowLeft} alt='arrow' fill objectFit='contain' className='cursor-pointer' />
-          </div>
+          <BackButton className='relative h-[16px] md:h-[24px] w-[16px] md:w-[24px]' />
           <h1 className='capitalize'>Contact us</h1>
         </div>
-        <div className='w-full md:h-[432px] flex flex-col md:flex-row gap-4'>
+        <div className='w-full md:h-[432px] flex flex-col md:flex-row gap-10'>
           <div className='w-full md:w-1/2 h-full flex flex-col justify-between'>
             <h2 className='font-semibold text-[24px] md:text-[32px]'>Have something to share or ask?</h2>
             <p className='md:text-[22px]'>Let us know, we’d love to hear from you!</p>

@@ -51,7 +51,7 @@ const BlogsPage: React.FC = () => {
     });
 
   return (
-    <div className="pb-5 max-w-[856px] mx-auto flex flex-col gap-5 text-[#2D2D2D]">
+    <div className="pb-5 w-10/12 mx-auto flex flex-col gap-5 text-[#2D2D2D]">
       <h1 className="text-[28px] font-semibold">Blogs</h1>
       <div className="flex justify-between">
         <div className="border flex bg-white w-1/2 items-center rounded-md px-2 py-1 gap-2">
@@ -90,7 +90,7 @@ const BlogsPage: React.FC = () => {
               <p className="text-[12px] text-[#b0b0b0]">
                 By {blog.author} on {blog.date}
               </p>
-              <p className="text-[15px] text-[#979797]">{blog.description}</p>
+              <p className="text-[15px] text-[#979797]">{blog.description} Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem eveniet vero veniam molestiae atque eos voluptatum itaque tempore assumenda veritatis!</p>
               <div className="flex flex-wrap justify-between mt-3">
                 <div className="flex gap-2">
                   {blog.tags.map((tag) => (
