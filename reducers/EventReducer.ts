@@ -1,4 +1,17 @@
-const initialState: any = [
+export interface Event {
+  id: number | Object | string;
+  title: string;
+  description: string;
+  date_from: string;
+  date_to: string;
+  location: string;
+  tags: string[];
+  organizer: string;
+  type: string;
+  category: string;
+  image: string;
+}
+const initialState: Event[] = [
   {
     id: 1,
     title: "Event 1",

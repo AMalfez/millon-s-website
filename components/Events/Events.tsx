@@ -3,8 +3,13 @@ import { SquareSquare, Menu } from "lucide-react";
 import React from "react";
 import { CardElement, CardElementHorizontal } from "./Card";
 import Link from "next/link";
+import { Event } from "@/reducers/EventReducer";
+interface EventsProps {
 
-function Events({events}:any) {
+  events: Event[];
+
+}
+const Events: React.FC<EventsProps> = ({ events }) => {
   const [isActive, setIsActive] = React.useState(false);
   const handleClick = () => setIsActive(!isActive);
   return (
@@ -28,7 +33,7 @@ function Events({events}:any) {
       </div>
       {!isActive && (
         <div className="w-full h-full mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="event_section_scroll_to">
-          {events.map((e:any, i:number) => (
+          {events.map((e:Event, i:number) => (
             <Link className="w-fit mx-auto" href={`/events/${i}`} key={i}>
               <CardElement key={i} event={e} />
             </Link>
@@ -37,7 +42,7 @@ function Events({events}:any) {
       )}
       {isActive && (
         <div className="w-full h-full mt-5 grid grid-cols-1 gap-4">
-          {events.map((e:any, i:number) => (
+          {events.map((e:Event, i:number) => (
             <Link className="w-full mx-auto" href={`/events/${i}`} key={i}>
               <CardElementHorizontal key={i} event={e} />
             </Link>

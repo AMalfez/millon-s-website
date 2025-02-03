@@ -18,6 +18,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { Query } from "../Home/HomeTypes"
 
 const categories = [
   {
@@ -38,7 +39,7 @@ const categories = [
   }
 ]
 
-export function SelectCategory({query,setQuery}:any) {
+export function SelectCategory({query,setQuery}:{query:Query, setQuery:Function}) {
   const [open, setOpen] = React.useState(false)
 
   return (

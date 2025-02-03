@@ -1,8 +1,9 @@
 "use client"
 import React from 'react'
 import { Input } from '../ui/input'
+import { Query } from '../Home/HomeTypes';
 
-function TagForm({query, setQuery}:any) {
+function TagForm({query, setQuery}:{query:Query, setQuery:Function}) {
     const [value, setValue] = React.useState<string>('');
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
@@ -13,7 +14,7 @@ function TagForm({query, setQuery}:any) {
         setValue('');
     }
     const handleCancel = (index: number) => {
-        const newTags = query.tags.filter((_:any, i:number) => i !== index);
+        const newTags = query.tags.filter((_:string, i:number) => i !== index);
         setQuery({...query, tags: newTags});
     }
   return (

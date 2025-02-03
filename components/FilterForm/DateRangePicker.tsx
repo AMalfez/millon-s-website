@@ -13,15 +13,16 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Query } from "../Home/HomeTypes";
 
 export function DatePickerWithRange({
   className,
   query,
   setQuery,
 }: {
-  className: React.HTMLAttributes<HTMLDivElement>;
-  query: any;
-  setQuery: any;
+  className: string;
+  query: Query;
+  setQuery: Function;
 }) {
   const [date, setDate] = React.useState<DateRange | undefined>(undefined);
   React.useEffect(()=>{

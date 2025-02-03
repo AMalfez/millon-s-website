@@ -7,9 +7,10 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { Search } from "react-feather";
 import "./Hero.css"
+import { Query } from "../Home/HomeTypes";
 
-export default function HeroCarousel({setQuery, query}:any) {
-  const handleSearch = (e:any) => setQuery({...query, title:e.target.value});
+export default function HeroCarousel({setQuery, query}:{query:Query, setQuery:Function}) {
+  const handleSearch = (e:React.ChangeEvent<HTMLInputElement>) => setQuery({...query, title:e.target.value});
   const handleClick = () => {
     const element = document.getElementById("event_section_scroll_to");
     if (element) {

@@ -18,6 +18,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { Query } from "../Home/HomeTypes"
 
 const types = [
   {
@@ -122,7 +123,7 @@ const types = [
   }
 ]
 
-export function SelectType({query, setQuery}:any) {
+export function SelectType({query, setQuery}:{query:Query, setQuery:Function}) {
   const [open, setOpen] = React.useState(false)
 
   return (
@@ -150,7 +151,7 @@ export function SelectType({query, setQuery}:any) {
                 <CommandItem
                   key={type.value}
                   value={type.value}
-                  onSelect={(currentValue:any) => {
+                  onSelect={(currentValue:string) => {
                     setQuery(currentValue === query.type ? {...query, type:""} : {...query, type:currentValue})
                     setOpen(false)
                   }}
