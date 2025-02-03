@@ -38,7 +38,7 @@ const CardElement: React.FC<EventProp> =({event}) => {
     </>
   );
 }
-function CardElementHorizontal({event}:any) {
+const CardElementHorizontal: React.FC<EventProp> =({event}) => {
   return (
     <>
       <Card className="p-0 cursor-pointer flex w-full">
