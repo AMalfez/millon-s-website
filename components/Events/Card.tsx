@@ -14,25 +14,25 @@ interface EventProp {
   event: Event;
 }
 const CardElement: React.FC<EventProp> =({event}) => {
+  const date = new Date(event.date_from).toDateString();
   return (
     <>
-      <Card className="p-0 cursor-pointer w-fit">
+      <Card className="p-2 cursor-pointer w-fit">
         <CardHeader>
           <Image
             src={event.image}
             alt="Picture of nature"
             height={200}
             width={400}
-            className="object-cover rounded-t-md"
+            className="object-cover aspect-video rounded-md"
             />
         </CardHeader>
         <CardContent className="mt-3">
+          <p className="text-[#bdbdbd] text-sm flex items-center gap-1">{date}</p>
           <p className="font-bold text-xl">{event.title}</p>
-          <p className="text-[#B0B0B0] flex items-center gap-1"><Clock size={16} color="#b0b0b0" /> {event.date_from} - {event.date_to}</p>
-          <p className="text-[#B0B0B0] flex gap-1"><MapPin className="mt-1" size={16} color="#b0b0b0" /> {event.location}</p>
-          <div className="mt-3 flex gap-2">
-            {event.tags.map((tag: string, index: number) => (<Badge key={index} variant={"secondary"}>{tag}</Badge>))}
-          </div>
+          <p className="text-[#979797] text-sm flex gap-1">{event.description} Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, autem!</p>
+          <p className="text-[#979797] mt-4 text-sm flex gap-1">By {event.organizer}</p>
+          
         </CardContent>
       </Card>
     </>

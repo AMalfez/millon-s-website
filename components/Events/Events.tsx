@@ -13,7 +13,7 @@ const Events: React.FC<EventsProps> = ({ events }) => {
   const [isActive, setIsActive] = React.useState(false);
   const handleClick = () => setIsActive(!isActive);
   return (
-    <div className="min-h-80 flex flex-col items-center justify-center max-w-[856px] mx-auto px-5">
+    <div className="min-h-80 flex flex-col items-center justify-center w-10/12 mx-auto px-5">
       <div className="flex justify-between items-center w-full">
         <div className="font-sans text-xl mx-auto md:mx-0 font-semibold">Events</div>
         <div className="items-center gap-2 hidden md:flex">
@@ -32,7 +32,7 @@ const Events: React.FC<EventsProps> = ({ events }) => {
         </div>
       </div>
       {!isActive && (
-        <div className="w-full h-full mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="event_section_scroll_to">
+        <div className="w-full h-full mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="event_section_scroll_to">
           {events.map((e:Event, i:number) => (
             <Link className="w-fit mx-auto" href={`/events/${i}`} key={i}>
               <CardElement key={i} event={e} />
