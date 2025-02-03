@@ -2,8 +2,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CardElement, CardElementHorizontal } from "../Events/Card";
 import { Event, initialState } from "@/reducers/EventReducer";
-import Image from "next/image";
-import NoSearch from "@/public/assets/images/searching_rafi.png"
 
 function AdminTab() {
   return (
