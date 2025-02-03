@@ -1,5 +1,4 @@
 "use client";
-import { MoveLeft } from "lucide-react";
 import React from "react";
 import EventCarousel from "./EventCarousel";
 import Link from "next/link";

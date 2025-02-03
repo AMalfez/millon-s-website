@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 // import { useParams } from "next/navigation";
-import { Heart, MessageSquareText, MoveLeft, Share2 } from "lucide-react";
+import { Heart, MessageSquareText, Share2 } from "lucide-react";
 import Img from "@/public/assets/06/Balboa-funzone-300x150.jpg";
 import Paragraph from "./Paragraph";
 import BlogImage from "./BlogImage";
