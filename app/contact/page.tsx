@@ -5,27 +5,11 @@ import Mail from "../../public/assets/images/Mail.png"
 import { Input } from '@/components/ui/input'
 
 const ContactPage = () => {
-  const [isClient, setIsClient] = useState(false); // State to ensure client-side only
-
-  useEffect(() => {
-    setIsClient(true); // Set this to true once client-side rendering starts
-  }, []);
-
-  const handleBack = () => {
-    if (isClient) {
-      window.history.back(); // Navigate back using browser's history
-    }
-  };
-
-  if (!isClient) {
-    return null; // Prevent server-side rendering of back functionality
-  }
-
   return (
     <div className='bg-[#F3F4F6] flex justify-center items-center mt-16 py-20 px-4'>
       <div className='min-h-fit md:h-[528px] w-full md:w-[856px] flex flex-col justify-between items-center'>
         <div className='w-full h-[32px] flex gap-2 md:gap-6 font-bold text-[20px] md:text-[28px] items-center'>
-          <div className='relative h-[16px] md:h-[24px] w-[16px] md:w-[24px]' onClick={handleBack}>
+          <div className='relative h-[16px] md:h-[24px] w-[16px] md:w-[24px]'>
             <Image src={ArrowLeft} alt='arrow' fill objectFit='contain' className='cursor-pointer' />
           </div>
           <h1 className='capitalize'>Contact us</h1>
