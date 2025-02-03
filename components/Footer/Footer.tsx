@@ -14,14 +14,14 @@ const Footer: React.FC<FooterProps> = () => {
       style={{ backgroundImage: "linear-gradient(to bottom, #F3F4F6, #F7D7AC)" }}
       className="flex flex-col gap-14 pb-1 mt-40"
     >
-      <div className="flex gap-8 md:gap-0 flex-col md:flex-row justify-between md:max-w-[856px] md:mx-auto">
-        <div className="w-full md:w-1/2 mt-5 flex flex-col items-center md:items-start ">
+      <div className="flex gap-8 md:gap-0 flex-col md:flex-row justify-center w-full md:mx-auto">
+        <div className="w-full mt-5 pl-8 lg:pl-0 max-w-[428px] flex flex-col items-center md:items-start ">
           <Image src={Logo} alt="Logo" width={180} height={62.5} />
           <p className="text-neutral-600 w-full text-md text-center md:text-left">
             Fun adventure in Orange County, CA.
           </p>
         </div>
-        <div className="w-full md:w-1/2  px-28">
+        <div className="w-full max-w-[428px] flex justify-center items-center">
           <div className="flex flex-col gap-6 w-fit">
             <nav className="flex flex-col items-center md:items-start gap-2 text-md text-[#535353]">
               <Link href="/">Home</Link>
