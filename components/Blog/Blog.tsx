@@ -8,8 +8,10 @@ import BlogImage from "./BlogImage";
 import Heading from "./Heading";
 import List from "./List";
 import CommentSection from "../Comment/Comment";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Blog() {
+  const { toast } = useToast();
   // const param = useParams();
   return (
     <div className="max-w-[856px] mx-auto">
@@ -29,7 +31,17 @@ export default function Blog() {
             </div>
           </div>
           <div className="flex">
-            <Share2 size={14} color="#979797" />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                navigator.clipboard.writeText(`https://yourwebsite.com/blog/0`);
+                toast({
+                  description: `Link to xyz copied to clipboard!`,
+                });
+              }}
+            >
+              <Share2 size={14} color="#979797" />
+            </button>
           </div>
         </div>
         <BlogImage src={Img} alt={"Balboa Funzone"} />
@@ -118,7 +130,17 @@ export default function Blog() {
           </div>
         </div>
         <div className="flex">
-          <Share2 size={16} color="#979797" />
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              navigator.clipboard.writeText(`https://yourwebsite.com/blog/0`);
+              toast({
+                description: `Link to xyz copied to clipboard!`,
+              });
+            }}
+          >
+            <Share2 size={16} color="#979797" />
+          </button>
         </div>
       </div>
       <CommentSection />

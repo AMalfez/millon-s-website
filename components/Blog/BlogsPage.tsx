@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Heart, MessageSquareText, Search, Share2 } from "lucide-react";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
+import { useToast } from "@/hooks/use-toast"
 
 const blogs = [
   // Sample blog data
@@ -32,6 +33,7 @@ const blogs = [
 ];
 
 const BlogsPage: React.FC = () => {
+  const { toast } = useToast()
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("recent");
 
@@ -112,7 +114,9 @@ const BlogsPage: React.FC = () => {
                       navigator.clipboard.writeText(
                         `https://yourwebsite.com/blog/${blog.id}`
                       );
-                      alert(`Link to ${blog.title} copied to clipboard!`);
+                      toast({
+                        description: `Link to ${blog.title} copied to clipboard!`,
+                      })
                     }}
                   >
                     <Share2 size={14} color="#979797" />
