@@ -9,8 +9,19 @@ export interface Event {
   organizer: string;
   type: string;
   category: string;
-  image: string;
+  image: StaticImageData | string;
 }
+
+import img1 from "@/public/assets/09/History-of-OC-300x179.jpg";
+import img2 from "@/public/assets/09/Space-mtn-300x225.jpg";
+import img3 from "@/public/assets/09/Surfer-300x169.jpg"
+import img4 from "@/public/assets/06/Balboa-funzone-300x150.jpg"
+import img5 from "@/public/assets/06/NEW-Balboa-fun-zone.jpg";
+import img6 from "@/public/assets/05/ckturistando-HTCQCvwV9XY-unsplash.jpg"
+import img7 from "@/public/assets/04/NEW-Adventure-city-768x432.jpg"
+import img8 from "@/public/assets/04/NEW-Boomers-300x225.jpg"
+import { StaticImageData } from "next/image";
+
 const initialState: Event[] = [
   {
     id: 1,
@@ -23,8 +34,7 @@ const initialState: Event[] = [
     organizer: "Organizer 1",
     type:"type1",
     category:"category1",
-    image:
-      "https://images.pexels.com/photos/994605/pexels-photo-994605.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    image:img1
   },
   {
     id: 2,
@@ -37,8 +47,7 @@ const initialState: Event[] = [
     organizer: "Organizer 2",
     type:"type2",
     category:"category2",
-    image:
-      "https://images.pexels.com/photos/994605/pexels-photo-994605.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    image:img2,
   },
   {
     id: 3,
@@ -51,48 +60,89 @@ const initialState: Event[] = [
     organizer: "Organizer 3",
     type:"type3",
     category:"category3",
+    image:img3,
+  },
+  {
+    id: 4,
+    title: "Event 4",
+    description: "Event 4 Description",
+    date_from: "2021-05-01",
+    date_to: "2021-05-02",
+    location: "Location 4",
+    tags: ["tag1", "tag2"],
+    organizer: "Organizer 4",
+    type:"type4",
+    category:"category4",
+    image:img4,
+  },
+  {
+    id: 5,
+    title: "Event 5",
+    description: "Event 5 Description",
+    date_from: "2021-05-01",
+    date_to: "2021-05-02",
+    location: "Location 5",
+    tags: ["tag1", "tag2"],
+    organizer: "Organizer 5",
+    type:"type5",
+    category:"category5",
+    image:img5,
+  },
+  {
+    id: 6,
+    title: "Event 6",
+    description: "Event 6 Description",
+    date_from: "2021-05-01",
+    date_to: "2021-05-02",
+    location: "Location 6",
+    tags: ["tag1", "tag2"],
+    organizer: "Organizer 6",
+    type:"type6",
+    category:"category6",
+    image:img6,
+  },
+  {
+    id: 7,
+    title: "Event 7",
+    description: "Event 7 Description",
+    date_from: "2021-05-01",
+    date_to: "2021-05-02",
+    location: "Location 7",
+    tags: ["tag1", "tag2"],
+    organizer: "Organizer 7",
+    type:"type7",
+    category:"category7",
+    image:img7,
+  },
+  {
+    id: 8,
+    title: "Event 8",
+    description: "Event 8 Description",
+    date_from: "2021-05-01",
+    date_to: "2021-05-02",
+    location: "Location 8",
+    tags: ["tag1", "tag2"],
+    organizer: "Organizer 8",
+    type:"type8",
+    category:"category8",
+    image:
+      img8,
+  },
+  {
+    id: 9,
+    title: "Event 9",
+    description: "Event 9 Description",
+    date_from: "2021-05-01",
+    date_to: "2021-05-02",
+    location: "Location 9",
+    tags: ["tag1", "tag2"],
+    organizer: "Organizer 9",
+    type:"type9",
+    category:"category9",
     image:
       "https://images.pexels.com/photos/994605/pexels-photo-994605.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-  },
+  }
 ];
 
-type Action = { type: "FILTER"; payload: any } | { type: "RESET" };
 
-const eventReducer = (state = initialState, action: Action) => {
-  switch (action.type) {
-    case "RESET":
-      return initialState;
-
-    case "FILTER": {
-      const ns = state
-        .filter((event: any) =>
-          event.title.toLowerCase().includes(action.payload.title.toLowerCase())
-        )
-        .filter((event: any) =>
-          action.payload.tags.every((tag: any) => event.tags.includes(tag))
-        )
-        .filter((event: any) =>
-          event.location.toLowerCase().includes(action.payload.location.toLowerCase())
-        )
-        .filter(
-          (event: any) =>
-            new Date(event.date_from) >= new Date(action.payload.date.from)
-          // && new Date(event.date_to) <= new Date(action.payload.to)
-        )
-        .filter((event: any) =>
-            event.type.toLowerCase().includes(action.payload.type.toLowerCase())
-        )
-        .filter((event: any) =>
-            event.category.toLowerCase().includes(action.payload.category.toLowerCase())
-        );
-      console.log("ns", ns);
-      
-      return ns;
-    }
-
-    default:
-      return state;
-  }
-};
-
-export { initialState, eventReducer };
+export { initialState };

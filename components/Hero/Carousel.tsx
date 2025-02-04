@@ -26,13 +26,13 @@ export default function HeroCarousel({setQuery, query}:{query:Query, setQuery:Re
       ]}
     >
       <CarouselContent>
-        <CarouselItem className="w-full h-screen">
+        <CarouselItem className="w-full h-[600px]">
             <div className="w-full h-screen hero_container"></div>
         </CarouselItem>
-        <CarouselItem className="w-full h-screen">
+        <CarouselItem className="w-full h-[600px]">
             <div className="w-full h-screen hero_container_two"></div>
         </CarouselItem>
-        <CarouselItem className="w-full h-screen">
+        <CarouselItem className="w-full h-[600px]">
             <div className="w-full h-screen hero_container_three"></div>
         </CarouselItem>
       </CarouselContent>
