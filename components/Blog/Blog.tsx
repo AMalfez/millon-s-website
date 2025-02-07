@@ -38,6 +38,7 @@ export default function Blog({params, post}:{params:{ slug: string; }, post: San
           <div className="flex">
             <button
               onClick={(e) => {
+                e.preventDefault();
                 navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_URL}/blog/${params.slug}`);
                 toast({
                   description: `Link copied to clipboard!`,

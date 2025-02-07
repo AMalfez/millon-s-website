@@ -1,9 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Img from "@/public/assets/06/Balboa-funzone-300x150.jpg";
 import Image from "next/image";
 import { Heart, MessageSquareText, Search, Share2 } from "lucide-react";
-import { Badge } from "../ui/badge";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast"
 import { getPosts } from "@/actions/blog";
@@ -53,18 +51,18 @@ const BlogsPage: React.FC = () => {
       const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
       return date.toLocaleDateString('en-US', options);
     }
-  const filteredBlogs = blogs
-    .filter((blog) =>
-      blog.title.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .sort((a, b) => {
-      if (filter === "likes") {
-        return b.likes - a.likes;
-      } else if (filter === "recent") {
-        return new Date(b.date).getTime() - new Date(a.date).getTime();
-      }
-      return 0;
-    });
+  // const filteredBlogs = blogs
+  //   .filter((blog) =>
+  //     blog.title.toLowerCase().includes(searchTerm.toLowerCase())
+  //   )
+  //   .sort((a, b) => {
+  //     if (filter === "likes") {
+  //       return b.likes - a.likes;
+  //     } else if (filter === "recent") {
+  //       return new Date(b.date).getTime() - new Date(a.date).getTime();
+  //     }
+  //     return 0;
+  //   });
 
   return (
     <div className="pb-5 w-10/12 mx-auto flex flex-col gap-5 text-[#2D2D2D]">
