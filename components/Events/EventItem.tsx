@@ -2,7 +2,6 @@
 import React from "react";
 import EventCarousel from "./EventCarousel";
 import Link from "next/link";
-import Paragraph from "../Blog/Paragraph";
 function EventItem() {
   return (
     <div className="max-w-[856px] border mx-auto bg-white rounded-lg min-h-56 p-3">
@@ -22,7 +21,7 @@ function EventItem() {
             <Link className="text-[#b0b0b0] underline" href={"/"}>Admin</Link>
           </div>
         </div>
-        <Paragraph>
+        {/* <Paragraph> */}
           <p className="text-[#b0b0b0]">
           Nestled in Dana Point, California, Baby Beach is the perfect place for
           families with small children seeking a safe, fun, and picturesque
@@ -30,13 +29,13 @@ function EventItem() {
           Harbor, offers a calm, sheltered environment for beachgoers of all
           ages to unwind, swim, and soak in the Southern Californian sun.
           </p>
-        </Paragraph>
-        <Paragraph>
+        {/* </Paragraph> */}
+        {/* <Paragraph> */}
           <p className="text-[#b0b0b0]">
             To get more information about the event, please visit:{" "}
             <Link className="underline" href={"/"}>official website</Link>.
           </p>
-        </Paragraph>
+        {/* </Paragraph> */}
         <div className="py-3 flex max-w-[836px] mx-auto gap-2">
           <div className="text-[#b0b0b0] border-2 rounded-md inline-block px-2 border-[#b0b0b0]">
             Adventure
