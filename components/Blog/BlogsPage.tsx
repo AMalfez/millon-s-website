@@ -1,11 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Img from "@/public/assets/06/Balboa-funzone-300x150.jpg";
 import Image from "next/image";
 import { Heart, MessageSquareText, Search, Share2 } from "lucide-react";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast"
+import { getPosts } from "@/actions/blog";
+import { type SanityDocument } from "next-sanity";
 
 const blogs = [
   // Sample blog data
@@ -36,7 +38,21 @@ const BlogsPage: React.FC = () => {
   const { toast } = useToast()
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("recent");
-
+  const [posts, setPosts] = useState<SanityDocument[]>([])
+  useEffect(()=>{
+      const fetchPosts = async () => {
+        const posts = await getPosts();
+        console.log(posts);
+        
+        setPosts(posts);
+      };
+      fetchPosts();
+    },[filter]);
+    function formatDate(dateString: string): string {
+      const date = new Date(dateString);
+      const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+      return date.toLocaleDateString('en-US', options);
+    }
   const filteredBlogs = blogs
     .filter((blog) =>
       blog.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -74,30 +90,32 @@ const BlogsPage: React.FC = () => {
         </select>
       </div>
       <div className="w-full flex flex-wrap md:flex-col gap-3">
-        {filteredBlogs.map((blog) => (
+        {posts.map((blog) => (
           <Link
-            key={blog.id}
-            href={`/blogs/${blog.id}`}
+            key={blog._id}
+            href={`/blogs/${blog.slug.current}`}
             className="flex flex-col w-full md:flex-row border rounded-md bg-white cursor-pointer p-2 no-underline text-inherit"
           >
             <Image
-              src={Img}
+              src={blog.mainImage.asset.url}
               alt={blog.title}
-              className="rounded-md w-full md:w-[250px] md:h-[150px] mr-5 object-cover"
+              width={100}
+              height={60}
+              className="rounded-md md:aspect-video w-full md:w-[250px] md:h-[150px] mr-5 object-cover"
             />
             <div className="w-full">
               <h2 className="text-[18px] font-semibold">{blog.title}</h2>
               <p className="text-[12px] text-[#b0b0b0]">
-                By {blog.author} on {blog.date}
+                By {blog.author} on {formatDate(blog.publishedAt)}
               </p>
-              <p className="text-[15px] text-[#979797]">{blog.description} Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem eveniet vero veniam molestiae atque eos voluptatum itaque tempore assumenda veritatis!</p>
+              <p className="text-[15px] text-[#979797] mt-2">{blog.description}</p>
               <div className="flex flex-wrap justify-between mt-3">
                 <div className="flex gap-2">
-                  {blog.tags.map((tag) => (
+                  {/* {blog.tags.map((tag) => (
                     <Badge key={tag} variant={"secondary"}>
                       {tag}
                     </Badge>
-                  ))}
+                  ))} */}
                 </div>
                 <div className="flex gap-2">
                   <p className="flex items-center text-[14px] text-[#979797] gap-1">
@@ -106,13 +124,13 @@ const BlogsPage: React.FC = () => {
                   </p>
                   <p className="flex items-center text-[14px] text-[#979797] gap-1">
                     <MessageSquareText size={14} />
-                    {blog.comments}
+                    {/* {blog.comments} */}0
                   </p>
                   <button
                     onClick={(e) => {
                       e.preventDefault();
                       navigator.clipboard.writeText(
-                        `https://yourwebsite.com/blog/${blog.id}`
+                        `${process.env.NEXT_PUBLIC_URL}/blogs/${blog.slug.current}`
                       );
                       toast({
                         description: `Link to ${blog.title} copied to clipboard!`,

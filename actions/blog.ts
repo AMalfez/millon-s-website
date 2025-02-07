@@ -5,10 +5,10 @@ import { client } from "@/sanity/client";
 const POSTS_QUERY = `*[
   _type == "blogPost"
   && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}`;
+]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, description, mainImage{asset->{url}}, likes, comments, "author": author->name}`;
 
 const POST_QUERY = `*[_type == "blogPost" && slug.current == $slug][0]{
-    _id, title, publishedAt, "author": author->name, categories, types, mainImage{asset->{url}}, body
+    _id, title, publishedAt, "author": author->name, tags, mainImage{asset->{url}}, body, intro, likes, comments
   }`;
 
 const options = { next: { revalidate: 30 } };
@@ -24,4 +24,13 @@ export const getPost = async (params: Promise<{ slug: string }>) => {
     options
   );
   return post;
+};
+
+export const getPostsTest = async (start: number, end: number) => {
+  const QUERY = `*[
+  _type == "blogPost"
+  && defined(slug.current)
+]|order(publishedAt desc)[${start}...${end}]{_id, title, slug, publishedAt}`;
+  const posts = await client.fetch<SanityDocument>(QUERY, {}, options);
+  return posts;
 };
