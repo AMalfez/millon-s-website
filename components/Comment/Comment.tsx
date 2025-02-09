@@ -61,7 +61,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ comment, postId }) => {
       return;
     }
     if (isChecked) setCookies(data);
-    let dateToday: Date = new Date();
+    const dateToday: Date = new Date();
     if (newComment.trim()) {
       const addC = await addComments({
         postId,
@@ -108,7 +108,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ comment, postId }) => {
 
   const handleAnonymous = async () => {
     setData({ name: "Anonymous", email: "" });
-    let dateToday: Date = new Date();
+    const dateToday: Date = new Date();
     if (newComment.trim()) {
       const addC = await addComments({
         postId,
