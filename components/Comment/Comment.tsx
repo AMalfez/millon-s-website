@@ -1,130 +1,245 @@
-"use client"
-import { Heart } from 'lucide-react';
-import React, { useState } from 'react';
+"use client";
+import { Comment, Reply } from "@/lib/types";
+import React, { useEffect, useState } from "react";
+import CommentItem from "./CommentItem";
+import { addComments } from "@/actions/comments";
+import { setCookies, getUserData } from "@/actions/cookies";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
+import { type SanityDocument } from "next-sanity";
+import { addReply } from "@/actions/reply";
 
-interface Comment {
-    id: number;
-    author: string;
-    text: string;
-    replies: Comment[];
-    date: string;
+interface CommentSectionProps {
+  comment: Comment[];
+  postId: string;
+}
+interface DataState {
+  name: string;
+  email: string;
 }
 
-const CommentSection: React.FC = () => {
-    const [comments, setComments] = useState<Comment[]>([]);
-    const [newComment, setNewComment] = useState<string>('');
+const CommentSection: React.FC<CommentSectionProps> = ({ comment, postId }) => {
+  const [comments, setComments] = useState<Comment[]>([...comment]);
+  const [newComment, setNewComment] = useState<string>("");
+  const [isDataAvailable, setIsDataAvailable] = useState<boolean>(false);
+  const [data, setData] = useState<DataState>({
+    name: "",
+    email: "",
+  });
+  const [isChecked, setIsChecked] = useState(true);
 
-    const handleCancelComment = () => {
-        setNewComment('');
-    }
-    const handleAddComment = () => {
-        const dateToday = new Date();
-        if (newComment.trim()) {
-            const newCommentObj: Comment = {
-                id: Date.now(),
-                author: 'Anonymous', // Replace with actual user data
-                text: newComment,
-                replies: [],
-                date: dateToday.toDateString(),
-            };
-            setComments([...comments, newCommentObj]);
-            setNewComment('');
-        }
-    };
-
-    const handleReply = (id: number, replyText: string) => {
-        const dateToday = new Date();
-        const updatedComments = comments.map(comment => {
-            if (comment.id === id) {
-                const newReply: Comment = {
-                    id: Date.now(),
-                    author: 'Anonymous', // Replace with actual user data
-                    text: replyText,
-                    replies: [],
-                    date: dateToday.toDateString(),
-                };
-                return { ...comment, replies: [...comment.replies, newReply] };
-            }
-            return comment;
+  useEffect(() => {
+    const fetchCookieData = async () => {
+      const data = await getUserData();
+      if (data && data.name && data.email) {
+        setData({
+          name: data.name?.toString() || "",
+          email: data.email?.toString() || "",
         });
-        setComments(updatedComments);
+        setIsDataAvailable(true);
+      }
     };
+    fetchCookieData();
+  }, []);
 
-    return (
-        <div className="mt-7 max-w-[836px] mx-auto">
-            <h2 className='text-center mb-3 leading-[32px] text-lg font-semibold'>Leave a comment</h2>
-            <div className='flex flex-col gap-2 justify-center'>
-                <input
-                    type="text"
-                    value={newComment}
-                    className='px-2 py-1 outline-none border-b border-[#b0b0b0] bg-transparent'
-                    onChange={(e) => setNewComment(e.target.value)}
-                    placeholder="Add a comment"
-                />
-                <div className='flex justify-end gap-4'>
-                    <button onClick={handleCancelComment}>Cancel</button>
-                    <button className='bg-[#b0b0b0] transition-all hover:bg-[#848383] rounded-md px-3 py-1 text-white' onClick={handleAddComment}>Comment</button>
-                </div>
-            </div>
-            <div className='mt-5'>
-                {comments.map(comment => (
-                    <CommentItem isReply={false} key={comment.id} comment={comment} onReply={handleReply} />
-                ))}
-            </div>
-        </div>
-    );
-};
-
-interface CommentItemProps {
-    comment: Comment;
-    onReply: (id: number, replyText: string) => void;
-    isReply: boolean;
-}
-
-const CommentItem: React.FC<CommentItemProps> = ({ comment, onReply, isReply }) => {
-    const [replyText, setReplyText] = useState<string>('');
-    const [showReply, setShowReply] = useState<boolean>(false);
-
-    const handleReplySubmit = () => {
-        if (replyText.trim()) {
-            onReply(comment.id, replyText);
-            setReplyText('');
-            setShowReply(false);
-        }
-    };
-    const handleReplyCancel = () => {
-        setReplyText('');
-        setShowReply(false);
+  const handleCancelComment = () => {
+    setNewComment("");
+  };
+  const handleAddComment = async () => {
+    if (data.name === "" || data.email === "") {
+      alert("Please fill your information.");
+      return;
     }
+    if (isChecked) setCookies(data);
+    let dateToday: Date = new Date();
+    if (newComment.trim()) {
+      const addC = await addComments({
+        postId,
+        name: data.name,
+        email: data.email,
+        comment: newComment,
+      });
+      const newCommentObj: Comment = {
+        _id: (addC as SanityDocument)._id,
+        name: data.name, // Replace with actual user data
+        comment: newComment,
+        reply: [],
+        publishedAt: dateToday.toDateString(),
+        likes: 0,
+      };
+      setComments([...comments, newCommentObj]);
+      setNewComment("");
+    }
+  };
 
-    return (
-        <div className={`${isReply ? 'pl-5 border-l border-[#b0b0b0] pb-3' : 'mt-5'}`}>
-            <p><strong className='text-md'>{comment.author}</strong> <span className='text-sm text-[#b0b0b0]'>{comment.date}</span></p>
-            <p>{comment.text}</p>
-            <div className={`flex items-center gap-4 mt-2 ${!isReply && "mb-3"}`}>
-                <div className='text-[14px] text-[#979797] flex items-center gap-1'><Heart size={14} strokeWidth={3} /> <strong>0</strong></div>
-                {!isReply && (<button className='text-[#979797] text-sm' onClick={() => setShowReply(!showReply)}><strong>Reply</strong></button>)}
-            </div>    
-            {showReply && (
-                <div className='mt-3 flex flex-col justify-end'>
-                    <input
-                        type="text"
-                        className='bg-transparent border-b border-[#b0b0b0] outline-none px-2 py-1'
-                        value={replyText}
-                        onChange={(e) => setReplyText(e.target.value)}
-                        placeholder="Add a reply"
+  const handleReply = async (id: string, replyText: string, isAnonymous: boolean) => {
+    const dateToday = new Date();
+    const newreply = await addReply({
+      name: !isAnonymous ? data.name:"Anonymous",
+      email: !isAnonymous ? data.email:"",
+      reply: replyText,
+      commentId: id,
+    });
+    const updatedComments = comments.map((comment) => {
+      if (comment._id === id) {
+        const newReply: Reply = {
+          _id: (newreply as SanityDocument)._id,
+          name: !isAnonymous ? data.name:"Anonymous", // Replace with actual user data
+          reply: replyText,
+          publishedAt: dateToday.toDateString(),
+          likes: 0,
+        };
+        return { ...comment, reply: [...comment.reply, newReply] };
+      }
+      return comment;
+    });
+    setComments(updatedComments);
+  };
+
+  const handleAnonymous = async () => {
+    setData({ name: "Anonymous", email: "" });
+    let dateToday: Date = new Date();
+    if (newComment.trim()) {
+      const addC = await addComments({
+        postId,
+        name: "Anonymous",
+        email: "",
+        comment: newComment,
+      });
+      const newCommentObj: Comment = {
+        _id: (addC as SanityDocument)._id,
+        name: "Anonymous", // Replace with actual user data
+        comment: newComment,
+        reply: [],
+        publishedAt: dateToday.toDateString(),
+        likes: 0,
+      };
+      setComments([...comments, newCommentObj]);
+      setNewComment("");
+    }
+  };
+
+  return (
+    <div className="mt-7 max-w-[836px] mx-auto">
+      <h2 className="text-center mb-3 leading-[32px] text-lg font-semibold">
+        Leave a comment
+      </h2>
+      <div className="flex flex-col gap-2 justify-center">
+        <input
+          type="text"
+          value={newComment}
+          className="px-2 py-1 outline-none border-b border-[#b0b0b0] bg-transparent"
+          onChange={(e) => setNewComment(e.target.value)}
+          placeholder="Add a comment"
+        />
+        <div className="flex justify-end gap-4">
+          <button onClick={handleCancelComment}>Cancel</button>
+          {!isDataAvailable && (
+            <Dialog>
+              <DialogTrigger asChild>
+                <button className="bg-[#b0b0b0] transition-all hover:bg-[#848383] rounded-md px-3 py-1 text-white">
+                  Comment
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>Leave a comment as</DialogTitle>
+                </DialogHeader>
+                <div className="grid gap-4 py-4">
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="name" className="text-right">
+                      Name
+                    </Label>
+                    <Input
+                      id="name"
+                      placeholder="Pedro Duarte"
+                      className="col-span-3"
+                      value={data.name}
+                      onChange={(e) =>
+                        setData({ ...data, name: e.target.value })
+                      }
                     />
-                    <div className='flex justify-end gap-4 mt-2'>
-                        <button onClick={handleReplyCancel}>Cancel</button>
-                        <button onClick={handleReplySubmit} className='bg-[#b0b0b0] transition-all hover:bg-[#848383] rounded-md px-3 py-1 text-white'>Reply</button>
-                    </div>
+                  </div>
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="email" className="text-right">
+                      Email
+                    </Label>
+                    <Input
+                      id="email"
+                      placeholder="test@gmail.com"
+                      className="col-span-3"
+                      value={data.email}
+                      onChange={(e) =>
+                        setData({ ...data, email: e.target.value })
+                      }
+                    />
+                  </div>
+                  <div className="flex items-center pl-12 space-x-2">
+                    <Checkbox id="save_changes" />
+                    <label
+                      htmlFor="save_changes"
+                      defaultChecked={isChecked}
+                      onChange={() => setIsChecked(!isChecked)}
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      Save changes for later use.
+                    </label>
+                  </div>
                 </div>
-            )}
-            {comment.replies.map(reply => (
-                <CommentItem isReply={true} key={reply.id} comment={reply} onReply={onReply} />
-            ))}
+                <DialogFooter>
+                  <DialogClose asChild>
+                    <button type="submit" onClick={handleAnonymous}>
+                      Post Anonymously
+                    </button>
+                  </DialogClose>
+                  <DialogClose asChild>
+                    <button
+                      className="bg-[#b0b0b0] transition-all hover:bg-[#848383] rounded-md px-3 py-1 text-white"
+                      onClick={handleAddComment}
+                      type="submit"
+                    >
+                      Done
+                    </button>
+                  </DialogClose>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          )}
+          {isDataAvailable && (
+            <button
+              onClick={handleAddComment}
+              className="bg-[#b0b0b0] transition-all hover:bg-[#848383] rounded-md px-3 py-1 text-white"
+            >
+              Comment
+            </button>
+          )}
         </div>
-    );
+      </div>
+      <div className="mt-5">
+        {comments.length > 0 &&
+          comments.map((c: Comment) => (
+            <CommentItem
+              key={c._id}
+              comment={c}
+              onReply={handleReply}
+              isDataAvailable={isDataAvailable}
+              data={data}
+              setData={setData}
+            />
+          ))}
+      </div>
+    </div>
+  );
 };
 
 export default CommentSection;

@@ -8,7 +8,21 @@ const POSTS_QUERY = `*[
 ]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, description, mainImage{asset->{url}}, likes, comments, "author": author->name}`;
 
 const POST_QUERY = `*[_type == "blogPost" && slug.current == $slug][0]{
-    _id, title, publishedAt, "author": author->name, tags, mainImage{asset->{url}}, body, intro, likes, comments
+    _id, title, publishedAt, "author": author->name, tags, mainImage{asset->{url}}, body, intro, likes,
+    "comments": *[_type == "comment" && blogPost._ref == ^._id ] | order(publishedAt asc) {
+      name,
+      comment,
+      publishedAt,
+      likes,
+      _id,
+      "reply": *[_type == "reply" && comment._ref == ^._id] | order(publishedAt asc) {
+        _id, 
+        name,
+        publishedAt,
+        likes,
+        reply
+      }
+    }
   }`;
 
 const options = { next: { revalidate: 30 } };

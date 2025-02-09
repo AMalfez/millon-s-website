@@ -16,8 +16,6 @@ export default function Blog({params, post}:{params:{ slug: string; }, post: San
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
     return date.toLocaleDateString('en-US', options);
   }
-  console.log(post);
-  console.log(params);
   
   return (
     <div className="max-w-[856px] mx-auto prose">
@@ -32,7 +30,7 @@ export default function Blog({params, post}:{params:{ slug: string; }, post: San
               <Heart size={14} color="#979797" /> {post.likes}
             </div>
             <div className="flex items-center gap-1 text-[#979797] text-[14px]">
-              <MessageSquareText size={14} color="#979797" /> 24
+              <MessageSquareText size={14} color="#979797" /> {post.comments.length}
             </div>
           </div>
           <div className="flex">
@@ -67,7 +65,7 @@ export default function Blog({params, post}:{params:{ slug: string; }, post: San
             <Heart size={16} color="#979797" /> {post.likes}
           </div>
           <div className="flex items-center gap-1 text-[#979797] text-[16px]">
-            <MessageSquareText size={16} color="#979797" /> 24
+            <MessageSquareText size={16} color="#979797" /> {post.comments.length}
           </div>
         </div>
         <div className="flex">
@@ -84,7 +82,7 @@ export default function Blog({params, post}:{params:{ slug: string; }, post: San
           </button>
         </div>
       </div>
-      <CommentSection />
+      <CommentSection comment={post.comments} postId={post._id} />
     </div>
   );
 }
