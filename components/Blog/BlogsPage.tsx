@@ -51,18 +51,18 @@ const BlogsPage: React.FC = () => {
       const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
       return date.toLocaleDateString('en-US', options);
     }
-  // const filteredBlogs = blogs
-  //   .filter((blog) =>
-  //     blog.title.toLowerCase().includes(searchTerm.toLowerCase())
-  //   )
-  //   .sort((a, b) => {
-  //     if (filter === "likes") {
-  //       return b.likes - a.likes;
-  //     } else if (filter === "recent") {
-  //       return new Date(b.date).getTime() - new Date(a.date).getTime();
-  //     }
-  //     return 0;
-  //   });
+  const filteredBlogs = posts
+    .filter((blog) =>
+      blog.title.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => {
+      if (filter === "likes") {
+        return b.likes - a.likes;
+      } else if (filter === "recent") {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      }
+      return 0;
+    });
 
   return (
     <div className="pb-5 w-10/12 mx-auto flex flex-col gap-5 text-[#2D2D2D]">
@@ -88,7 +88,7 @@ const BlogsPage: React.FC = () => {
         </select>
       </div>
       <div className="w-full flex flex-wrap md:flex-col gap-3">
-        {posts.map((blog) => (
+        {filteredBlogs.map((blog) => (
           <Link
             key={blog._id}
             href={`/blogs/${blog.slug.current}`}
