@@ -14,7 +14,7 @@ export async function fetchAllEvents() {
             image
             }
         }`;
-        const events = await client.fetch(query);
+        const events = await client.fetch(query,{},options);
         return events;
     } catch (error) {
         console.error('Error fetching events:', error);

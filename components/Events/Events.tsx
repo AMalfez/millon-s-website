@@ -1,22 +1,15 @@
 "use client";
 import { SquareSquare, Menu } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { CardElement, CardElementHorizontal } from "./Card";
 import Link from "next/link";
-import { fetchAllEvents } from "@/actions/event";
 import { type SanityDocument } from "next-sanity";
-
-const Events: React.FC = () => {
+interface EventProp{
+  events:SanityDocument[];
+}
+const Events: React.FC<EventProp> = ({events}) => {
   const [isActive, setIsActive] = React.useState(false);
-  const [events, setEvents] = useState<SanityDocument[]>([]);
-  useEffect(()=>{
-    const fetchEvents = async()=>{
-      const events = await fetchAllEvents();
-      console.log(events)
-      setEvents(events);
-    }
-    fetchEvents();
-  },[])
+  
   const handleClick = () => setIsActive(!isActive);
   return (
     <div className="min-h-80 flex flex-col items-center justify-center w-10/12 mx-auto px-5">
