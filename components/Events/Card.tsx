@@ -41,21 +41,22 @@ const CardElement: React.FC<EventProp> =({event}) => {
   );
 }
 const CardElementHorizontal: React.FC<EventProp> =({event}) => {
+  const eventImageUrl = event.mainImage ? urlFor(event.mainImage)?.width(300).height(200).url():null;
   return (
     <>
       <Card className="p-0 cursor-pointer flex w-full h-fit">
         <CardHeader className="flex items-center justify-center py-2 pl-3">
-          <Image
-          src={event.image}
-          alt="Picture of nature"
-          height={150}
-          width={300}
-          className="object-cover rounded-md"
-          />
+        {eventImageUrl && (<Image
+            src={eventImageUrl}
+            alt="Picture of nature"
+            height={150}
+            width={300}
+            className="object-cover rounded-md"
+            />)}
         </CardHeader>
         <CardContent className="mt-3 w-full">
           <p className="font-bold text-xl">{event.title}</p>
-          <p className="text-[#B0B0B0] text-sm md:text-md flex items-center gap-1"><Clock size={16} color="#b0b0b0" /> {event.date_from} - {event.date_to}</p>
+          <p className="text-[#B0B0B0] text-sm md:text-md flex items-center gap-1"><Clock size={16} color="#b0b0b0" /> {formatDate(event.startDate)} - {formatDate(event.endDate)}</p>
           <p className="text-[#B0B0B0] text-sm md:text-md flex gap-1"><MapPin size={16} className="mt-1" color="#b0b0b0" /> {event.location}</p>
           <p className="text-[#B0B0B0] text-sm md:text-md flex gap-1 mt-2">{event.description}</p>
           <div className="mt-3 flex gap-2">
