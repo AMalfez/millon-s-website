@@ -6,7 +6,6 @@ export default async function page({
   }: {
     params: Promise<{ slug: string }>;
   }){
-    const resolvedParams = await params;
     const event = await fetchEventBySlug(params);
     return(
         <div className="mt-16 p-3 md:p-10">
