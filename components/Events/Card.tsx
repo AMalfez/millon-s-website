@@ -9,29 +9,31 @@ import { Badge } from "@/components/ui/badge"
 
 import React from "react";
 import { Clock, MapPin } from "lucide-react";
-import { Event } from "@/reducers/EventReducer";
+import { type SanityDocument } from "next-sanity";
+import urlFor from "@/lib/ImageUrlBuilder";
+import formatDate from "@/lib/formatDate";
 interface EventProp {
-  event: Event;
+  event: SanityDocument;
 }
 const CardElement: React.FC<EventProp> =({event}) => {
-  const date = new Date(event.date_from).toDateString();
+  const eventImageUrl = event.mainImage ? urlFor(event.mainImage)?.width(300).height(200).url():null;
   return (
     <>
       <Card className="p-2 cursor-pointer w-fit">
         <CardHeader>
-          <Image
-            src={event.image}
+          {eventImageUrl && (<Image
+            src={eventImageUrl}
             alt="Picture of nature"
             height={200}
             width={400}
             className="object-cover w-full aspect-video rounded-md"
-            />
+            />)}
         </CardHeader>
         <CardContent className="mt-3">
-          <p className="text-[#bdbdbd] text-sm flex items-center gap-1">{date}</p>
+          <p className="text-[#bdbdbd] text-sm flex items-center gap-1">{formatDate(event.publishedAt)}</p>
           <p className="font-bold text-xl">{event.title}</p>
-          <p className="text-[#979797] text-sm flex gap-1">{event.description} Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, autem!</p>
-          <p className="text-[#979797] mt-4 text-sm flex gap-1">By {event.organizer}</p>
+          <p className="text-[#979797] text-sm flex gap-1">{event.description}</p>
+          <p className="text-[#979797] mt-4 text-sm flex gap-1">By {event.organizer.name}</p>
           
         </CardContent>
       </Card>
