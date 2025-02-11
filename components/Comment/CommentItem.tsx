@@ -4,7 +4,7 @@ import { Comment, Reply } from "@/lib/types";
 import ReplyItem from "./ReplyItem";
 import { Heart } from "lucide-react";
 import formatDate from "@/lib/formatDate";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogClose,
@@ -17,7 +17,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { setCookies } from "@/actions/cookies";
+import { getIsCommentLiked, setCookies } from "@/actions/cookies";
+import { likeComment } from "@/actions/comments";
+import { type SanityDocument } from "next-sanity";
 interface DataState {
   name: string;
   email: string;
@@ -37,10 +39,22 @@ const CommentItem: React.FC<CommentItemProps> = ({
   data,
   setData
 }) => {
+  const [likes, setLikes] = useState(comment.likes);
+  const [isLiked, setIsLiked] = useState(false);
   const [replyText, setReplyText] = useState<string>("");
   const [showReply, setShowReply] = useState<boolean>(false);
   const [isChecked, setIsChecked] = useState<boolean>(false);
-
+  useEffect(()=>{
+    const fetchLiked = async(commentId:string)=>{
+      const liked = await getIsCommentLiked(commentId);
+      setIsLiked(liked);
+    }
+    fetchLiked(comment._id);
+  },[likes])
+  const handleLikes = async()=>{
+    const like = await likeComment(comment._id) as SanityDocument;
+    setLikes(like.likes);
+  }
   const handleReplySubmit = () => {
     if (replyText.trim()) {
       if (data.name === "" || data.email === "") {
@@ -75,7 +89,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
       <p className="m-0">{comment.comment}</p>
       <div className={`flex items-center gap-4 mt-2 mb-3`}>
         <div className="text-[14px] text-[#979797] flex items-center gap-1">
-          <Heart size={14} strokeWidth={3} /> <strong>{comment.likes}</strong>
+          <Heart size={14} onClick={handleLikes} className="cursor-pointer" color={isLiked ? "red":"#979797"} fill={isLiked ? "red":"transparent"} strokeWidth={3} /> <strong>{likes}</strong>
         </div>
         <button
           className="text-[#979797] text-sm"

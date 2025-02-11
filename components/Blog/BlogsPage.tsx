@@ -122,7 +122,7 @@ const BlogsPage: React.FC = () => {
                   </p>
                   <p className="flex items-center text-[14px] text-[#979797] gap-1">
                     <MessageSquareText size={14} />
-                    {/* {blog.comments} */}0
+                    {blog.comments.length}
                   </p>
                   <button
                     onClick={(e) => {

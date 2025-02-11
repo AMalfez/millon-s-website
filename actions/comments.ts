@@ -1,5 +1,6 @@
 'use server'
 import { client } from "@/sanity/client";
+import { getIsCommentLiked, setIsCommentLiked } from "./cookies";
 
 interface Data{
     name:string;
@@ -29,5 +30,12 @@ export const addComments = async({name,email,comment,postId}:Data)=>{
     }
 }
 
-
-
+export const likeComment = async(commentId:string)=>{
+    const isAlreadyLiked = await getIsCommentLiked(commentId);
+    await setIsCommentLiked(!isAlreadyLiked,commentId);
+    if(!isAlreadyLiked) {
+        const res = await client.patch(commentId).inc({likes:1}).commit();
+        return res;
+    }
+    return await client.patch(commentId).dec({likes:1}).commit();
+}

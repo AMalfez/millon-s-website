@@ -1,11 +1,14 @@
+'use server'
 import { type SanityDocument } from "next-sanity";
 
 import { client } from "@/sanity/client";
+import { getLiked, setLiked } from "./cookies";
 
 const POSTS_QUERY = `*[
   _type == "blogPost"
   && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, description, mainImage{asset->{url}}, likes, comments, "author": author->name}`;
+]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, description, mainImage{asset->{url}}, likes, "comments": *[_type == "comment" && blogPost._ref == ^._id ] {
+      _id}, "author": author->name}`;
 
 const POST_QUERY = `*[_type == "blogPost" && slug.current == $slug][0]{
     _id, title, publishedAt, "author": author->name, tags, mainImage{asset->{url}}, body, intro, likes,
@@ -48,3 +51,22 @@ export const getPostsTest = async (start: number, end: number) => {
   const posts = await client.fetch<SanityDocument>(QUERY, {}, options);
   return posts;
 };
+
+
+export const likePost = async(_id:string)=>{
+  try{
+    const liked = await getLiked(_id);
+    await setLiked(!liked,_id);
+    if(!liked) {
+      const res = await client.patch(_id).inc({likes:1}).commit();
+      console.log(res);
+      
+      return res;
+    }
+    const res = await client.patch(_id).dec({likes:1}).commit();
+    console.log(res);
+    return res;
+  }catch(err){
+    return err;
+  }
+}

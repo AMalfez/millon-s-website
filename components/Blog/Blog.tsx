@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Heart, MessageSquareText, Share2 } from "lucide-react";
 import BlogImage from "./BlogImage";
 import { PortableText } from "next-sanity";
@@ -8,15 +8,30 @@ import ImageCustomComponent from "@/components/ImageComponent"
 import CommentSection from "../Comment/Comment";
 import { useToast } from "@/hooks/use-toast";
 import { type SanityDocument } from "next-sanity";
+import { likePost } from "@/actions/blog";
+import { getLiked } from "@/actions/cookies";
 
 export default function Blog({params, post}:{params:{ slug: string; }, post: SanityDocument}) {
   const { toast } = useToast();
+  const [isLiked, setIsLiked] = useState(false);
+  const [likes, setLikes] = useState(post.likes);
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
     return date.toLocaleDateString('en-US', options);
   }
-  
+  useEffect(()=>{
+    const getIsLiked = async()=>{
+      const liked = await getLiked(post._id);
+      setIsLiked(liked);
+    }
+    getIsLiked();
+  },[likes])
+  const handleLike = async()=>{
+    const res = await likePost(post._id) as SanityDocument;
+    setLikes(res.likes);
+    console.log(res,"likes");
+  }
   return (
     <div className="max-w-[856px] mx-auto prose">
       <div className="max-w-[836px] mt-5 mx-auto border-b-2 border-[#b0b0b0] pb-5">
@@ -27,7 +42,7 @@ export default function Blog({params, post}:{params:{ slug: string; }, post: San
         <div className="flex justify-between mt-4">
           <div className="flex gap-3">
             <div className="flex items-center gap-1 text-[#979797] text-[14px]">
-              <Heart size={14} color="#979797" /> {post.likes}
+              <Heart size={14} onClick={handleLike} className="cursor-pointer" fill={isLiked ? "red":"transparent"} color={isLiked? "red":"#979797"} /> {likes}
             </div>
             <div className="flex items-center gap-1 text-[#979797] text-[14px]">
               <MessageSquareText size={14} color="#979797" /> {post.comments.length}
@@ -62,7 +77,7 @@ export default function Blog({params, post}:{params:{ slug: string; }, post: San
       <div className="flex justify-between mx-auto max-w-[836px]">
         <div className="flex gap-3">
           <div className="flex items-center gap-1 text-[#979797] text-[16px]">
-            <Heart size={16} color="#979797" /> {post.likes}
+            <Heart onClick={handleLike} className="cursor-pointer" fill={isLiked ? "red":"transparent"} size={16} color={isLiked? "red":"#979797"} /> {likes}
           </div>
           <div className="flex items-center gap-1 text-[#979797] text-[16px]">
             <MessageSquareText size={16} color="#979797" /> {post.comments.length}
