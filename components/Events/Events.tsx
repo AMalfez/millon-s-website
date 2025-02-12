@@ -1,6 +1,6 @@
 "use client";
 import { SquareSquare, Menu } from "lucide-react";
-import React, { useEffect } from "react";
+import React from "react";
 import { CardElement, CardElementHorizontal } from "./Card";
 import Link from "next/link";
 import { type SanityDocument } from "next-sanity";
