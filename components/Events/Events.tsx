@@ -1,13 +1,16 @@
 "use client";
 import { SquareSquare, Menu } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { CardElement, CardElementHorizontal } from "./Card";
 import Link from "next/link";
 import { type SanityDocument } from "next-sanity";
-interface EventProp{
-  events:SanityDocument[];
+interface EventProp {
+  events: SanityDocument[];
+  setTimes: React.Dispatch<React.SetStateAction<number>>;
+  prev: number;
+  disabled: boolean;
 }
-const Events: React.FC<EventProp> = ({events}) => {
+const Events: React.FC<EventProp> = ({events, setTimes, prev, disabled}) => {
   const [isActive, setIsActive] = React.useState(false);
   
   const handleClick = () => setIsActive(!isActive);
@@ -48,7 +51,7 @@ const Events: React.FC<EventProp> = ({events}) => {
           ))}
         </div>
       )}
-      <button className="border-2 border-[#474747] transition-all text-[#474747] rounded-md hover:bg-[#474747] hover:text-white my-10 px-4 py-2">
+      <button onClick={()=> setTimes(prev+1)} className={`border-2 ${disabled ? "hidden":"block w-fit"} border-[#474747] transition-all text-[#474747] rounded-md hover:bg-[#474747] hover:text-white my-10 px-4 py-2`}>
         LOAD MORE
       </button>
     </div>

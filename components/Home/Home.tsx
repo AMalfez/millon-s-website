@@ -5,7 +5,7 @@ import FilterForm from "../FilterForm/FilterForm";
 import Events from "../Events/Events";
 import { Query } from "./HomeTypes";
 import { type SanityDocument } from "next-sanity";
-import { fetchAllEvents } from "@/actions/event";
+import { fetchAllEvents9by9 } from "@/actions/event";
 
 function Home() {
   const [query, setQuery] = React.useState<Query>({
@@ -17,18 +17,27 @@ function Home() {
     category: "",
   });
   const [events, setEvents] = useState<SanityDocument[]>([]);
-
+  const [allEvents, setAllEvents] = useState<SanityDocument[]>([]);
+  const [disabled, setDisabled] = React.useState(true);
+  const [times,setTimes] = useState(0);
   useEffect(() => {
     const initialize = async () => {
-      const eve = await fetchAllEvents();
+      const eve = await fetchAllEvents9by9(times);
       console.log(eve);
-      filterEvents(eve);
+      if(eve.length < 9) setDisabled(true);
+      else setDisabled(false);
+      setAllEvents([...allEvents,...eve]);
     };
     initialize();
-    
-  }, [query]);
+  }, [times]);
+
+  useEffect(()=>{
+    filterEvents(allEvents);
+  },[query, allEvents])
 
   const filterEvents = (events:SanityDocument[])=>{
+    if(events.length===0) return;
+    console.log(events)
     let filtered_events = events.filter((i: SanityDocument) =>
       i.title.toLowerCase().includes(query.title.toLowerCase())
     );
@@ -66,7 +75,7 @@ function Home() {
     <>
       <HeroCarousel query={query} setQuery={setQuery} />
       <FilterForm query={query} setQuery={setQuery} />
-      <Events events={events} />
+      <Events events={events} setTimes={setTimes} prev={times} disabled={disabled} />
     </>
   );
 }
