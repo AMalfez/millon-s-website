@@ -5,8 +5,10 @@ import Mail from "@/public/assets/images/Mail.png"
 import { Input } from '@/components/ui/input'
 import BackButton from '@/components/ui/BackButton'
 import { sendMail } from '@/actions/mail'
+import { useToast } from "@/hooks/use-toast"
 
 function Contact() {
+  const { toast } = useToast()
     const [data, setData] = React.useState({
         name:"",
         email:"",
@@ -23,8 +25,15 @@ function Contact() {
               <p>Please reply as soon as possible</p>
               `});
             console.log(res);
-            
+            toast({
+              title:"Message sent successfully!",
+              description:"We will get back to you shortly."
+            })
         } catch (error) {
+          toast({
+            title:"Message unsuccessful!",
+            description:"Sorry. We can't send your message right now. Please try again later."
+          })
             console.log(error);
             
         }
