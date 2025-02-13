@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="text-white absolute top-0 z-50 w-full navbar_container px-4">
+    <nav className="text-white z-50 w-full navbar_container px-4">
       <div className="w-10/12 mx-auto">
         <div className="flex justify-between h-16">
           <div className="flex-shrink-0 flex items-center">
