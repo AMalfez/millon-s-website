@@ -29,6 +29,7 @@ function Contact() {
               title:"Message sent successfully!",
               description:"We will get back to you shortly."
             })
+            setData({name:"",email:"",message:""});
         } catch (error) {
           toast({
             title:"Message unsuccessful!",
