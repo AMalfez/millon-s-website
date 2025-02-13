@@ -73,7 +73,7 @@ function Home() {
   }
   return (
     <>
-      <HeroCarousel query={query} setQuery={setQuery} />
+      <HeroCarousel />
       <FilterForm query={query} setQuery={setQuery} />
       <Events events={events} setTimes={setTimes} prev={times} disabled={disabled} />
     </>
