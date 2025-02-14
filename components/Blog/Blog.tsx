@@ -20,6 +20,7 @@ export default function Blog({params, post}:{params:{ slug: string; }, post: San
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
     return date.toLocaleDateString('en-US', options);
   }
+
   useEffect(()=>{
     const getIsLiked = async()=>{
       const liked = await getLiked(post._id);
@@ -38,7 +39,7 @@ export default function Blog({params, post}:{params:{ slug: string; }, post: San
         <h1 className="text-3xl font-semibold mb-0 pb-0">
           {post.title}
         </h1>
-        <p className="text-sm mt-0 pt-0 text-[#979797]">By {post.author} on {formatDate(post.publishedAt)}</p>
+        <p className="text-sm mt-0 pt-0 text-[#979797]">Posted on {formatDate(post.publishedAt)}</p>
         <div className="flex justify-between mt-4">
           <div className="flex gap-3">
             <div className="flex items-center gap-1 text-[#979797] text-[14px]">

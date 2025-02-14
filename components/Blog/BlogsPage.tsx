@@ -7,31 +7,6 @@ import { useToast } from "@/hooks/use-toast"
 import { getPosts } from "@/actions/blog";
 import { type SanityDocument } from "next-sanity";
 
-// const blogs = [
-//   // Sample blog data
-//   {
-//     id: 1,
-//     title: "First Blog",
-//     author: "Author 1",
-//     date: "2023-10-02",
-//     likes: 10,
-//     comments: 2,
-//     tags: ["React", "JavaScript"],
-//     description: "This is a short description of the first blog.",
-//   },
-//   {
-//     id: 2,
-//     title: "Second Blog",
-//     author: "Author 2",
-//     date: "2023-10-01",
-//     likes: 11,
-//     comments: 3,
-//     tags: ["Angular", "JavaScript"],
-//     description: "This is a short description of the first blog.",
-//   },
-//   // Add more blog objects here
-// ];
-
 const BlogsPage: React.FC = () => {
   const { toast } = useToast()
   const [searchTerm, setSearchTerm] = useState("");
@@ -104,7 +79,7 @@ const BlogsPage: React.FC = () => {
             <div className="w-full">
               <h2 className="text-[18px] font-semibold">{blog.title}</h2>
               <p className="text-[12px] text-[#b0b0b0]">
-                By {blog.author} on {formatDate(blog.publishedAt)}
+                Posted on {formatDate(blog.publishedAt)}
               </p>
               <p className="text-[15px] text-[#979797] mt-2">{blog.description}</p>
               <div className="flex flex-wrap justify-between mt-3">
