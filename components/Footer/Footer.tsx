@@ -11,9 +11,12 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = () => {
   const { toast } = useToast()
+  const [loading, setLoading] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if(loading) return;
+    setLoading(true);
     try {    
     const response = await fetch("/api/subscribe", {
       method: "POST",
@@ -45,6 +48,7 @@ const Footer: React.FC<FooterProps> = () => {
         description:"OOPS! some error occured. Please try again later."
       })
   }
+  setLoading(false);
   }
   return (
     <footer
@@ -80,10 +84,10 @@ const Footer: React.FC<FooterProps> = () => {
                   className="py-2 outline-none px-4 rounded-md"
                 />
                 <button
-                  type="submit"
-                  className="bg-[#FF9501] w-fit transition-all hover:bg-[#ffab35] py-2 px-4 text-white font-semibold rounded-md"
+                  type={!loading ? "submit":"button"}
+                  className={`${!loading ? "cursor-pointer":"cursor-not-allowed"} bg-[#FF9501] w-fit transition-all hover:bg-[#ffab35] py-2 px-4 text-white font-semibold rounded-md`}
                 >
-                  Signup
+                  {!loading ? "Signup":"Wait..."}
                 </button>
               </div>
             </form>

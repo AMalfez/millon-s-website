@@ -20,13 +20,16 @@ function Home() {
   const [allEvents, setAllEvents] = useState<SanityDocument[]>([]);
   const [disabled, setDisabled] = React.useState(true);
   const [times,setTimes] = useState(0);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const initialize = async () => {
+      setLoading(true);
       const eve = await fetchAllEvents9by9(times);
       console.log(eve);
       if(eve.length < 9) setDisabled(true);
       else setDisabled(false);
       setAllEvents([...allEvents,...eve]);
+      setLoading(false);
     };
     initialize();
   }, [times]);
@@ -75,7 +78,8 @@ function Home() {
     <>
       <HeroCarousel />
       <FilterForm query={query} setQuery={setQuery} />
-      <Events events={events} setTimes={setTimes} prev={times} disabled={disabled} />
+      {loading && (<div className="min-h-80 flex flex-col items-center justify-center w-10/12 mx-auto px-5 text-2xl text-[#979797]">Loading...</div>)}
+      {!loading && (<Events events={events} setTimes={setTimes} prev={times} disabled={disabled} />)}
     </>
   );
 }

@@ -7,13 +7,11 @@ export const setCookies = async({name,email}:{name:string, email:string}) => {
     if(CookieStore.has("user_email")) CookieStore.delete("user_email");
     CookieStore.set({
         name:"user_name",
-        value:name,
-        maxAge:10000
+        value:name
     });
     CookieStore.set({
         name:"user_email",
-        value:email,
-        maxAge:10000
+        value:email
     });
 }
 export const getUserData = async()=>{
@@ -39,8 +37,7 @@ export const setLiked = async(value:boolean, id:string)=>{
     if(CookieStore.has(`liked_${id}`)) CookieStore.delete(`liked_${id}`);
     CookieStore.set({
         name:`liked_${id}`,
-        value: value ? "yes":"no",
-        maxAge:100000
+        value: value ? "yes":"no"
     })
 }
 
@@ -62,8 +59,7 @@ export const setIsCommentLiked = async(value:boolean, commentId:string)=>{
     if(CookieStore.has(`comment_liked_${commentId}`)) CookieStore.delete(`comment_liked_${commentId}`);
     CookieStore.set({
         name:`comment_liked_${commentId}`,
-        value: value ? "yes":"no",
-        maxAge:100000
+        value: value ? "yes":"no"
     })
 }
 
@@ -72,7 +68,6 @@ export const setIsReplyLiked = async(value:boolean, replyId:string)=>{
     if(CookieStore.has(`reply_liked_${replyId}`)) CookieStore.delete(`reply_liked_${replyId}`);
     CookieStore.set({
         name:`reply_liked_${replyId}`,
-        value: value ? "yes":"no",
-        maxAge:100000
+        value: value ? "yes":"no"
     })
 }

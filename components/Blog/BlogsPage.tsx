@@ -12,12 +12,15 @@ const BlogsPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("recent");
   const [posts, setPosts] = useState<SanityDocument[]>([])
+  const [loading, setLoading] = useState(true);
   useEffect(()=>{
       const fetchPosts = async () => {
+        setLoading(true);
         const posts = await getPosts();
         console.log(posts);
         
         setPosts(posts);
+        setLoading(false);
       };
       fetchPosts();
     },[filter]);
@@ -63,7 +66,8 @@ const BlogsPage: React.FC = () => {
         </select>
       </div>
       <div className="w-full flex flex-wrap md:flex-col gap-3">
-        {filteredBlogs.map((blog) => (
+      {loading && (<div className="min-h-80 flex flex-col items-center justify-center w-10/12 mx-auto px-5 text-2xl text-[#979797]">Loading...</div>)}
+        {!loading && filteredBlogs.map((blog) => (
           <Link
             key={blog._id}
             href={`/blogs/${blog.slug.current}`}
