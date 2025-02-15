@@ -12,6 +12,7 @@ import { Clock, MapPin } from "lucide-react";
 import { type SanityDocument } from "next-sanity";
 import urlFor from "@/lib/ImageUrlBuilder";
 import formatDate from "@/lib/formatDate";
+import { trimStringForEvent } from "@/lib/utils";
 interface EventProp {
   event: SanityDocument;
 }
@@ -32,7 +33,7 @@ const CardElement: React.FC<EventProp> =({event}) => {
         <CardContent className="mt-3">
           <p className="text-[#bdbdbd] text-sm flex items-center gap-1">{formatDate(event.publishedAt)}</p>
           <p className="font-bold text-xl">{event.title}</p>
-          <p className="text-[#979797] text-sm flex gap-1">{event.description}</p>
+          <p className="text-[#979797] text-sm flex gap-1">{trimStringForEvent(event.description)}</p>
           <p className="text-[#979797] mt-4 text-sm flex gap-1">By {event.organizer.name}</p>
           
         </CardContent>
@@ -58,7 +59,7 @@ const CardElementHorizontal: React.FC<EventProp> =({event}) => {
           <p className="font-bold text-xl">{event.title}</p>
           <p className="text-[#B0B0B0] text-sm md:text-md flex items-center gap-1"><Clock size={16} color="#b0b0b0" /> {formatDate(event.startDate)} - {formatDate(event.endDate)}</p>
           <p className="text-[#B0B0B0] text-sm md:text-md flex gap-1"><MapPin size={16} className="mt-1" color="#b0b0b0" /> {event.location}</p>
-          <p className="text-[#B0B0B0] text-sm md:text-md flex gap-1 mt-2">{event.description}</p>
+          <p className="text-[#B0B0B0] text-sm md:text-md flex gap-1 mt-2">{trimStringForEvent(event.description)}</p>
           <div className="mt-3 flex gap-2">
             {event.tags.map((tag: string, index: number) => (<Badge key={index} variant={"secondary"}>{tag}</Badge>))}
           </div>

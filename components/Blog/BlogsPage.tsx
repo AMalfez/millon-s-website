@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useToast } from "@/hooks/use-toast"
 import { getPosts } from "@/actions/blog";
 import { type SanityDocument } from "next-sanity";
+import { trimString } from "@/lib/utils";
 
 const BlogsPage: React.FC = () => {
   const { toast } = useToast()
@@ -85,7 +86,7 @@ const BlogsPage: React.FC = () => {
               <p className="text-[12px] text-[#b0b0b0]">
                 Posted on {formatDate(blog.publishedAt)}
               </p>
-              <p className="text-[15px] text-[#979797] mt-2">{blog.description}</p>
+              <p className="text-[15px] text-[#979797] mt-2">{trimString(blog.description)}</p>
               <div className="flex flex-wrap justify-between mt-3">
                 <div className="flex gap-2">
                   {/* {blog.tags.map((tag) => (
