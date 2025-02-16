@@ -47,17 +47,17 @@ export async function fetchEventBySlug(params: Promise<{ slug: string }>) {
 
 export async function fetchAllEvents9by9(i: number) {
   try {
-    const start = i * 9 > 0 ? i*9 - 1:i*9,
-      end = i * 9 + 8;
-    const query = `*[_type == "event"][${start}...${end}]{
-            ...,
-            organizer-> {
-            name,
-            slug,
-            bio,
-            image
-            }
-        }`;
+    const start = i * 9;
+    const end = start + 9;
+    const query = `*[_type == "event"] | order(_createdAt desc) [${start}...${end}]{
+        ...,
+        organizer-> {
+        name,
+        slug,
+        bio,
+        image
+        }
+      }`;
     const events = await client.fetch(query, {}, options);
     return events;
   } catch (error) {
