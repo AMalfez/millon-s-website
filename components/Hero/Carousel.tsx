@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import "./Hero.css"
+import HeroImg from '@/public/assets/06/beach-768x160.jpg'
 
 export default function HeroCarousel() {
   const handleClick = () => {
@@ -10,9 +12,16 @@ export default function HeroCarousel() {
     }
   }
   return (
-    <div className="w-full h-[600px]">
-      <div className="w-full h-full hero_container"></div>
-      <div className="hero_text flex flex-col items-center w-full max-w-[900px]">
+    <div className="w-full">
+      {/* <div className="w-full h-full hero_container"></div> */}
+      <Image
+        src={HeroImg}
+        alt="Hero Image"
+        width={100}
+        height={100}
+        className="w-full"
+      />
+      <div className="hero_text mx-auto flex flex-col items-center w-full max-w-[900px]">
         <p className="text-4xl lg:text-5xl tracking-wide font-[600] ">
           Looking for a new adventure this weekend in Orange County, California?
         </p>

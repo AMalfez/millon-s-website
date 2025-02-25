@@ -54,26 +54,26 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       {isOpen && (
-        <div className=" md:hidden">
-          <div className="px-8 pt-5 pb-3 space-y-1 sm:px-3 flex flex-col">
-            <Link href="/" className="text-gray-800 transition-all hover:text-gray-900">
+        <div className="mx-auto w-10/12 md:hidden">
+          <div className="pt-5 pl-2 pb-3 space-y-3 sm:px-3 flex flex-col">
+            <Link href="/" className="text-gray-800 border-b pb-1 pl-1 transition-all hover:text-gray-900">
               Home
             </Link>
             <Link
               href="/about"
-              className="text-gray-800 transition-all hover:text-gray-900"
+              className="text-gray-800 border-b pb-1 pl-1 transition-all hover:text-gray-900"
             >
               About
             </Link>
             <Link
               href="/blogs"
-              className="text-gray-800 transition-all hover:text-gray-900"
+              className="text-gray-800 border-b pb-1 pl-1 transition-all hover:text-gray-900"
             >
               Blogs
             </Link>
             <Link
               href="/contact"
-              className="text-gray-800 transition-all hover:text-gray-900"
+              className="text-gray-800 border-b pb-1 pl-1 transition-all hover:text-gray-900"
             >
               Contact
             </Link>
